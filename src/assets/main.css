@@ -4,6 +4,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .text-bs {
+    @apply text-xs leading-sm tracking-xl
+  }
+
+  .text-fl {
+    @apply text-sm leading-xs tracking-lg
+  }
+  .text-sl {
+    @apply text-md leading-lg tracking-sm
+  }
+  .text-tl {
+    @apply text-lg leading-md tracking-md
+  }
+  .text-max {
+    @apply text-xl leading-xl tracking-xs
+  }
+}
+
 @media screen and (max-width: 1280px) {
   body, html {
     font-size: 8.89px;
