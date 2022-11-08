@@ -1,18 +1,26 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { RouterView } from 'vue-router'
+import SideBar from './components/SideBar.vue';
+
+const darkMode = ref(false);
+
+function toggleMode() {
+  darkMode.value = !darkMode.value
+}
 </script>
 
 <template>
-  <div class="bg-white-off dark:bg-black-off h-screen flex">
-    <aside class="w-[10.3rem]"></aside>
-    <main class="flex-1 py-[6.4rem]">
-      <div class="w-[73rem] mx-auto">
-        <RouterView />
-      </div>   
-    </main>
-    
+  <div :class="{'dark': darkMode}">
+    <div class="bg-white-off dark:bg-black-off h-screen flex">
+      <SideBar :dark-mode="darkMode" @toggle="toggleMode" />
+      <main class="flex-1 py-[6.4rem]">
+        <div class="w-[73rem] mx-auto">
+          <RouterView />
+        </div>   
+      </main>   
+    </div>
   </div>
   
+  
 </template>
-
-<style scoped></style>
