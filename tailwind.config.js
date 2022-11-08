@@ -20,7 +20,9 @@ module.exports = {
         light: '#DFE3FA',
         vgray: '#888EB0',
         gray: '#7E88C3',
-        mgray: '#858BB2'
+        mgray: '#858BB2',
+        deep: '#373B53',
+        mdeep: '#494E6E'
       },
       'black': {
         DEFAULT: '#0C0E16',
@@ -56,13 +58,17 @@ module.exports = {
       },
       borderRadius: {
         lgs: '0.6rem',
-        xls: '0.8rem'
+        xls: '0.8rem',
+        '4xl': '2rem'
       },
       boxShadow: {
         lgs: '0px 10px 10px -10px rgba(72, 84, 159, 0.100397)'
       },
       spacing: {
-        0.8: '0.8rem'
+        0.8: '0.8rem',
+        2.4: '2.4rem',
+        3.2: '3.2rem',
+        10.3: '10.3rem'
       }
     },
   },
