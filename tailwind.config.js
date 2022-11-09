@@ -32,7 +32,8 @@ module.exports = {
         DEFAULT: '#EC5757',
         light: '#FF9797'
       },
-      'green': '#33D69F'
+      'green': '#33D69F',
+      'yellow': '#FF8F00'
     },
     fontSize: {
       xs: '1.1rem',
@@ -66,6 +67,7 @@ module.exports = {
       },
       spacing: {
         0.8: '0.8rem',
+        1.6: '1.6rem',
         2.4: '2.4rem',
         3.2: '3.2rem',
         10.3: '10.3rem'
