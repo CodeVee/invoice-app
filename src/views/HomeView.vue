@@ -7,9 +7,3 @@ import InvoiceCard from '../components/InvoiceCard.vue';
     <InvoiceCard /> 
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: 'Home View',
-  components: { InvoiceCard }
-}
-</script>

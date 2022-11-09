@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { RouterView } from 'vue-router'
-import SideBar from './components/SideBar.vue';
+  import { ref } from 'vue';
+  import { RouterView } from 'vue-router'
+  import SideBar from './components/SideBar.vue';
 
-const darkMode = ref(false);
+  const darkMode = ref(false),
 
-function toggleMode() {
-  darkMode.value = !darkMode.value
-}
+  toggleMode = () => {
+    darkMode.value = !darkMode.value
+  }
 </script>
 
 <template>
@@ -21,6 +21,4 @@ function toggleMode() {
       </main>   
     </div>
   </div>
-  
-  
 </template>
