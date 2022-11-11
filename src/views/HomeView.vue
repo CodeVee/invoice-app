@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import type { Invoice } from '@/models/invoice';
-import { onMounted, reactive } from 'vue';
+import { computed, onMounted, reactive } from 'vue';
 import InvoiceCard from '../components/InvoiceCard.vue';
+import NoInvoice from '../components/NoInvoice.vue';
 import MainHeader from '../components/MainHeader.vue';
 
 interface State {
   invoices: Invoice[]
 } 
 
-const state: State = reactive({ invoices: []});
+const state: State = reactive({ invoices: []}),
+hasNoInvoice = computed(() => {
+  return state.invoices.length === 0;
+})
 onMounted(async () => {
   const data = await fetch('invoices.json');
   const invoices = await data.json(); 
@@ -22,8 +26,9 @@ onMounted(async () => {
   <div class="">
     <MainHeader :invoice-count="state.invoices.length"/>
     <div class="flex flex-col gap-1.6">
-    <InvoiceCard v-for="invoice in state.invoices" :key="invoice.id" :invoice="invoice" /> 
-  </div>
+      <InvoiceCard v-for="invoice in state.invoices" :key="invoice.id" :invoice="invoice" /> 
+    </div>
+    <NoInvoice v-if="hasNoInvoice" />
   </div>
   
 </template>
