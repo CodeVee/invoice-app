@@ -14,8 +14,8 @@
   <div :class="{'dark': darkMode}">
     <div class="bg-white-off dark:bg-black-off h-screen flex">
       <SideBar :dark-mode="darkMode" @toggle="toggleMode" />
-      <main class="flex-1 py-[6.4rem]">
-        <div class="w-[73rem] mx-auto">
+      <main class="flex-1 py-[6.4rem] overflow-y-scroll">
+        <div class="w-[73rem] mx-auto ">
           <RouterView />
         </div>   
       </main>   

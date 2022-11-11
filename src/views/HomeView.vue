@@ -2,6 +2,7 @@
 import type { Invoice } from '@/models/invoice';
 import { onMounted, reactive } from 'vue';
 import InvoiceCard from '../components/InvoiceCard.vue';
+import MainHeader from '../components/MainHeader.vue';
 
 interface State {
   invoices: Invoice[]
@@ -18,7 +19,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-1.6">
+  <div class="">
+    <MainHeader :invoice-count="state.invoices.length"/>
+    <div class="flex flex-col gap-1.6">
     <InvoiceCard v-for="invoice in state.invoices" :key="invoice.id" :invoice="invoice" /> 
   </div>
+  </div>
+  
 </template>
