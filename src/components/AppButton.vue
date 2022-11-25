@@ -18,7 +18,7 @@ btnClass = computed(() => {
         case 'secondary':
             return 'text-white bg-red';
         default:
-            return 'text-blue-gray bg-blue-vlight';
+            return 'text-blue-gray dark:text-blue-light bg-blue-vlight dark:bg-blue-dark';
     }
 })
 </script>
