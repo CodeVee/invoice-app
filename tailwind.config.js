@@ -18,6 +18,7 @@ module.exports = {
         vdark: '#1E2139',
         dark: '#252945',
         light: '#DFE3FA',
+        vlight: '#F9FAFE',
         vgray: '#888EB0',
         gray: '#7E88C3',
         mgray: '#858BB2',
@@ -38,6 +39,7 @@ module.exports = {
     fontSize: {
       xs: '1.1rem',
       sm: '1.2rem',
+      ms: '1.5rem',
       md: '1.6rem',
       lg: '2rem',
       xl: '3.2rem',
@@ -45,6 +47,7 @@ module.exports = {
     lineHeight: {
       xs: '1.5rem',
       sm: '1.8rem',
+      ms: '2rem',
       md: '2.2rem',
       lg: '2.4rem',
       xl: '3.6rem',
@@ -60,16 +63,19 @@ module.exports = {
       borderRadius: {
         lgs: '0.6rem',
         xls: '0.8rem',
-        '4xl': '2rem'
+        '4xl': '2rem',
+        '4ls': '2.4rem'
       },
       boxShadow: {
         lgs: '0px 10px 10px -10px rgba(72, 84, 159, 0.100397)'
       },
       spacing: {
         0.8: '0.8rem',
+        1.2: '1.2rem',
         1.6: '1.6rem',
         2.4: '2.4rem',
         3.2: '3.2rem',
+        4.8: '4.8rem',
         10.3: '10.3rem'
       }
     },
