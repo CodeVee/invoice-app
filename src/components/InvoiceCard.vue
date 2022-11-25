@@ -7,17 +7,25 @@ import InvoiceStatus from './InvoiceStatus.vue';
 interface Props {
     invoice: Invoice
 }
+interface Emits {
+        (e: 'select'): void
+    }
 const props = defineProps<Props>(),
+emits = defineEmits<Emits>(),
 formattedDate = computed(() => {
     return format(new Date(props.invoice.paymentDue), 'dd MMM yyyy')
 }),
 formattedAmount = computed(() => {
     return new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(props.invoice.total)
-})
+}),
+
+viewMore = () => emits('select');
+
+
 </script>
 
 <template>
-    <div class="bg-white dark:bg-blue-vdark flex items-center h-[7.2rem] shadow-lgs pl-[3.2rem] pr-[2.4rem] rounded-xls">
+    <div @click="viewMore" class="bg-white dark:bg-blue-vdark flex items-center h-[7.2rem] shadow-lgs pl-[3.2rem] pr-[2.4rem] rounded-xls cursor-pointer active:scale-[.99]">
         <h3 class="text-fl font-bold mr-[4.3rem]">
             <span class="text-blue-gray">#</span>
             <span class=" text-black dark:text-white">{{invoice.id}}</span>

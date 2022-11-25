@@ -13,7 +13,8 @@ const router = createRouter({
     {
       path: '/invoice/:id',
       name: 'invoice',
-      component: InvoiceView
+      component: InvoiceView,
+      props: true
     },
     {
       path: '/about',
