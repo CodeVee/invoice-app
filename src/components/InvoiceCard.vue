@@ -1,24 +1,16 @@
 <script setup lang="ts">
 import type { Invoice } from '@/models/invoice';
-import { computed } from 'vue';
-import { format } from 'date-fns';
+import { formatAmount, formatDate } from '@/helpers/main.helper';
 import InvoiceStatus from './InvoiceStatus.vue';
 
 interface Props {
     invoice: Invoice
 }
 interface Emits {
-        (e: 'select'): void
-    }
+    (e: 'select'): void
+}
 const props = defineProps<Props>(),
 emits = defineEmits<Emits>(),
-formattedDate = computed(() => {
-    return format(new Date(props.invoice.paymentDue), 'dd MMM yyyy')
-}),
-formattedAmount = computed(() => {
-    return new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(props.invoice.total)
-}),
-
 viewMore = () => emits('select');
 
 
@@ -32,11 +24,11 @@ viewMore = () => emits('select');
         </h3>
         <h3 class="mr-[4.5rem] text-fl font-medium">
             <span class="text-blue-gray dark:text-blue-light">Due  </span>
-            <span class=" text-blue-vgray dark:text-blue-light">{{formattedDate}}</span>
+            <span class=" text-blue-vgray dark:text-blue-light">{{formatDate(props.invoice.paymentDue)}}</span>
         </h3>
         <h3 class="text-blue-mgray dark:text-white mr-[7.3rem] text-fl font-medium">{{invoice.clientName}}</h3>
         <h3 class="text-black dark:text-white mr-16  text-sl font-bold">
-            £ {{formattedAmount}}
+            £ {{formatAmount(invoice.total)}}
         </h3>
         <InvoiceStatus :status="invoice.status"/>
         <button>

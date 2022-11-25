@@ -35,11 +35,11 @@
                 <div class="flex flex-col gap-3.2">
                     <div>
                         <h5 class="text-fl font-medium text-blue-gray dark:text-blue-light mb-1.2">Invoice Date</h5>
-                        <h5 class="text-black dark:text-white font-bold text-ms leading-ms">{{state.invoice.createdAt}}</h5>
+                        <h5 class="text-black dark:text-white font-bold text-ms leading-ms">{{formatDate(state.invoice.createdAt)}}</h5>
                     </div>
                     <div>
                         <h5 class="text-fl font-medium text-blue-gray dark:text-blue-light mb-1.2">Payment Due</h5>
-                        <h5 class="text-black dark:text-white font-bold text-ms leading-ms">{{state.invoice.paymentDue}}</h5>
+                        <h5 class="text-black dark:text-white font-bold text-ms leading-ms">{{formatDate(state.invoice.paymentDue)}}</h5>
                     </div>       
                 </div>
                 <div class="flex flex-col gap-0.8 ml-40 mr-44">
@@ -71,13 +71,13 @@
                 <div v-for="item in state.invoice.items" :key="item.name" class="grid grid-cols-[28.4rem_3rem_1fr_1fr] mt-3.2">
                     <span class="text-black dark:text-white text-fl font-bold">{{item.name}}</span>
                     <span class="text-blue-gray dark:text-blue-light text-fl font-bold text-center">{{item.quantity}}</span>
-                    <span class="text-blue-gray dark:text-blue-light text-fl font-bold text-right">£ {{item.price}}</span>
-                    <span class="text-black dark:text-white text-fl font-bold text-right">£ {{item.total}}</span>
+                    <span class="text-blue-gray dark:text-blue-light text-fl font-bold text-right">£ {{formatAmount(item.price)}}</span>
+                    <span class="text-black dark:text-white text-fl font-bold text-right">£ {{formatAmount(item.total)}}</span>
                 </div>
             </div>
             <div class="flex justify-between items-center bg-blue-deep dark:bg-black text-white px-3.2 h-32 rounded-b-xls">
                 <span class="font-medium text-bs">Amount Due</span>
-                <span class="font-bold text-[2.4rem] leading-[3.2rem]">£ {{state.invoice.total}}</span>
+                <span class="font-bold text-[2.4rem] leading-[3.2rem]">£ {{formatAmount(state.invoice.total)}}</span>
             </div>
         </div>
     </div>
@@ -87,6 +87,7 @@
 import AppButton from '@/components/AppButton.vue';
 import InvoiceStatus from '@/components/InvoiceStatus.vue';
 import type { Invoice } from '@/models/invoice';
+import { formatAmount, formatDate } from '@/helpers/main.helper';
 import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
