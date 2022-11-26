@@ -1,11 +1,11 @@
 <template>
     <div class="h-[5.9rem] mb-[6.5rem] flex items-center">
         <div class="flex flex-col">
-            <h1 class="text-max text-black font-bold mb-0.8">Invoices</h1>
-            <h2 class="text-blue-vgray text-fl font-medium">{{invoiceMessage}}</h2>
+            <h1 class="text-max text-black dark:text-white font-bold mb-0.8">Invoices</h1>
+            <h2 class="text-blue-vgray dark:text-blue-light text-fl font-medium">{{invoiceMessage}}</h2>
         </div>
         <button class="flex mr-16 ml-auto">
-            <span class="mr-1.6 text-black font-bold text-fl">Filter by status</span>
+            <span class="mr-1.6 text-black dark:text-white font-bold text-fl">Filter by status</span>
             <img class="self-center" src="@/assets/images/icon-arrow-down.svg" alt="down arrow">
         </button>
         <button class="w-[15rem] h-[4.8rem] px-0.8 rounded-[2.4rem] bg-purple flex items-center">
