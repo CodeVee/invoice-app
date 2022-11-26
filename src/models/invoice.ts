@@ -27,3 +27,28 @@ export interface Invoice {
     }[];
   total: number;
 }
+
+export const DefaultInvoice: Invoice = {
+  id: '',
+  createdAt: '2022-11-24',
+  paymentDue: '2022-11-24',
+  description: '',
+  paymentTerms: 0,
+  clientName: '',
+  clientEmail: '',
+  status: 'draft',
+  senderAddress: {
+    street: '',
+    city: '',
+    postCode: '',
+    country: '',
+  },
+  clientAddress: {
+    street: '',
+    city: '',
+    postCode: '',
+    country: '',
+  },
+  items: [],
+  total: 0,
+}
