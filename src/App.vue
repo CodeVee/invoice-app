@@ -2,6 +2,7 @@
   import { ref } from 'vue';
   import { RouterView } from 'vue-router'
   import SideBar from './components/SideBar.vue';
+  import InvoiceForm from './components/InvoiceForm.vue';
 
   const darkMode = ref(false),
 
@@ -12,7 +13,11 @@
 
 <template>
   <div :class="{'dark': darkMode}">
-    <div class="bg-white-off dark:bg-black-off h-screen flex">
+    <div class="bg-white-off dark:bg-black-off h-screen flex relative">
+      <div class="absolute top-0 left-0 w-full h-full">
+        <div class="bg-black w-full h-full opacity-50"></div>
+        <InvoiceForm />
+      </div>
       <SideBar :dark-mode="darkMode" @toggle="toggleMode" />
       <main class="flex-1 py-[6.4rem] overflow-y-scroll">
         <div class="w-[73rem] mx-auto ">

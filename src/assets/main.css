@@ -18,6 +18,9 @@
   .text-tl {
     @apply text-lg leading-md tracking-md
   }
+  .text-ts {
+    @apply text-ls leading-ls tracking-ls
+  }
   .text-max {
     @apply text-xl leading-xl tracking-xs
   }

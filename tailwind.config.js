@@ -23,7 +23,8 @@ module.exports = {
         gray: '#7E88C3',
         mgray: '#858BB2',
         deep: '#373B53',
-        mdeep: '#494E6E'
+        mdeep: '#494E6E',
+        vdeep: '#777F98'
       },
       'black': {
         DEFAULT: '#0C0E16',
@@ -42,6 +43,7 @@ module.exports = {
       ms: '1.5rem',
       md: '1.6rem',
       lg: '2rem',
+      ls: '2.4rem',
       xl: '3.2rem',
     },
     lineHeight: {
@@ -50,6 +52,7 @@ module.exports = {
       ms: '2rem',
       md: '2.2rem',
       lg: '2.4rem',
+      ls: '3.2rem',
       xl: '3.6rem',
     },
     extend: {
@@ -57,6 +60,7 @@ module.exports = {
         xs: '-1px',
         sm: '-0.8px',
         md: '-0.63px',
+        ls: '-0.5px',
         lg: '-0.25px',
         xl: '-0.23px'
       },
@@ -76,6 +80,7 @@ module.exports = {
         2.4: '2.4rem',
         3.2: '3.2rem',
         4.8: '4.8rem',
+        5.6: '5.6rem',
         10.3: '10.3rem'
       }
     },
