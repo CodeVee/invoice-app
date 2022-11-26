@@ -10,7 +10,7 @@
                 <InvoiceStatus :status="state.invoice.status" />
             </div>
             <div class="flex gap-0.8">
-                <AppButton text="Edit" type="tetiary"/>
+                <AppButton text="Edit" type="tetiary" @btn-click="editInvoice"/>
                 <AppButton text="Delete" type="secondary"/>
                 <AppButton text="Mark as Paid" type="primary"/>
             </div> 
@@ -86,10 +86,11 @@
 <script setup lang="ts">
 import AppButton from '@/components/AppButton.vue';
 import InvoiceStatus from '@/components/InvoiceStatus.vue';
-import type { Invoice } from '@/models/invoice';
+import { DefaultInvoice, type Invoice } from '@/models/invoice';
 import { formatAmount, formatDate } from '@/helpers/main.helper';
 import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import { store } from '@/store';
 
     interface Props { 
         id: string
@@ -100,7 +101,10 @@ import { useRouter } from 'vue-router';
     const props = defineProps<Props>(),
     state = reactive<State>({ invoice: null }),
     router = useRouter(),
-    goHome = () => router.push({name: 'home'});
+    goHome = () => router.push({name: 'home'}),
+    editInvoice = () => {
+        store.setEditMode(state.invoice ? state.invoice : { ...DefaultInvoice})
+    };
 
     onMounted(async () => {
         const data = await fetch('/invoices.json');

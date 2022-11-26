@@ -8,7 +8,7 @@
             <span class="mr-1.6 text-black dark:text-white font-bold text-fl">Filter by status</span>
             <img class="self-center" src="@/assets/images/icon-arrow-down.svg" alt="down arrow">
         </button>
-        <button class="w-[15rem] h-[4.8rem] px-0.8 rounded-[2.4rem] bg-purple flex items-center">
+        <button @click="store.toggleFormMode()" class="w-[15rem] h-[4.8rem] px-0.8 rounded-[2.4rem] bg-purple flex items-center">
             <span class="w-3.2 h-3.2 rounded-full bg-white flex justify-center items-center">
                 <img src="@/assets/images/icon-plus.svg" alt="plus">
             </span>
@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { store } from '@/store';
 
     interface Props { 
         invoiceCount: number
@@ -35,7 +36,3 @@ import { computed } from 'vue';
         }
     })
 </script>
-
-<style scoped>
-
-</style>

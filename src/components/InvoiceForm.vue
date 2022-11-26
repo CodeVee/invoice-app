@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white w-[71.9rem] h-full absolute z-10 top-0 left-0 rounded-r-4xl pt-5.6 pr-5.6 pb-3.2 pl-[15.6rem] overflow-y-auto bars">
-        <h3 class="text-black font-bold text-ts mb-4.8">New Invoice</h3>
-        <form>        
+        <h3 class="text-black font-bold text-ts mb-4.8">{{editMode? 'Edit #XM9141' : 'New Invoice'}}</h3>
+        <form @submit.prevent="">        
             <div class="flex flex-col gap-2.4 mb-4.8">
                 <h4 class="text-fl font-bold text-purple">Bill From</h4>
                 <text-box label-text="Street Address"/>
@@ -50,7 +50,7 @@
                     <button class="bg-blue-vlight rounded-4ls h-4.8 text-blue-gray font-bold text-fl">+ Add New Item</button>
                 </div>
                 <div class="flex justify-end gap-0.8">
-                    <AppButton text="Cancel" type="tetiary"/>
+                    <AppButton text="Cancel" type="tetiary" @btn-click="cancelForm"/>
                     <AppButton text="Save Changes" type="primary"/>
                 </div>
             </div>
@@ -59,13 +59,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import TextBox from './TextBox.vue';
 import AppButton from './AppButton.vue';
 import { formatAmount } from '@/helpers/main.helper';
 
-const reap = ref('')
-const items = [ 156, 400]
+interface Props {
+    editMode: boolean
+}
+interface Emits {
+    (e: 'cancel'): void
+}
+const items = [ 156, 400],
+
+props = defineProps<Props>(),
+
+emits = defineEmits<Emits>(),
+
+cancelForm = () => emits('cancel')
+
+
 </script>
 
 <style scoped>

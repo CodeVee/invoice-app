@@ -1,5 +1,5 @@
 <template>
-    <button :class="btnClass" class="py-1.6 px-2.4 text-fl font-bold rounded-4ls">{{text}}</button>
+    <button @click="press" :class="btnClass" class="py-1.6 px-2.4 text-fl font-bold rounded-4ls">{{text}}</button>
 </template>
 
 <script setup lang="ts">
@@ -10,7 +10,11 @@ interface Props {
     text: string;
     type: 'primary' | 'secondary' | 'tetiary'
 }
+interface Emits {
+    (e: 'btnClick'): void 
+}
 const props = defineProps<Props>(),
+emits = defineEmits<Emits>(),
 btnClass = computed(() => {
     switch (props.type) {
         case 'primary':
@@ -20,5 +24,6 @@ btnClass = computed(() => {
         default:
             return 'text-blue-gray dark:text-blue-light bg-blue-vlight dark:bg-blue-dark';
     }
-})
+}),
+press = () => emits('btnClick')
 </script>
