@@ -96,10 +96,10 @@ import { store } from '@/store';
         id: string
     }
     interface State {
-        invoice: Invoice | undefined
+        invoice?: Invoice
     }
     const props = defineProps<Props>(),
-    state = reactive<State>({ invoice: undefined }),
+    state = reactive<State>({}),
     router = useRouter(),
     goHome = () => router.push({name: 'home'}),
     editInvoice = () => store.toggleFormMode(state.invoice)

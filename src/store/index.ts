@@ -7,7 +7,7 @@ interface Store {
     darkMode: boolean;
     editMode: boolean;
     invoices: Invoice[];
-    selectedInvoice: Invoice | null;
+    selectedInvoice?: Invoice;
     toggleFormMode(invoice?: Invoice): void;
     toggleDarkMode(): void,
     getInvoices(): void
@@ -18,7 +18,6 @@ export const store = reactive<Store>({
   darkMode: false,
   editMode: false,
   invoices: [],
-  selectedInvoice: null,
 
   toggleFormMode(invoice?: Invoice) {
     this.formMode = !this.formMode
@@ -30,7 +29,7 @@ export const store = reactive<Store>({
 
     if (!this.formMode) {
         this.editMode = false;
-        this.selectedInvoice = null
+        this.selectedInvoice = undefined
     }
   },
   
