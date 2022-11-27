@@ -1,5 +1,6 @@
 import { DefaultInvoice, type Invoice } from '@/models/invoice';
 import { reactive } from 'vue'
+import jsonInvoices from '@/data/invoices.json'
 
 interface Store {
     formMode: boolean;
@@ -9,7 +10,7 @@ interface Store {
     selectedInvoice: Invoice | null;
     toggleFormMode(invoice?: Invoice): void;
     toggleDarkMode(): void,
-    getInvoices(): Promise<void>
+    getInvoices(): void
 }
 
 export const store = reactive<Store>({
@@ -37,9 +38,8 @@ export const store = reactive<Store>({
     this.darkMode = !this.darkMode
   },
 
-  async getInvoices() {
-    const data = await fetch('/invoices.json');
-    const invoices = await data.json() as Invoice[]; 
+  getInvoices() {
+    const invoices = jsonInvoices as Invoice[]; 
     this.invoices = invoices
   }
 })

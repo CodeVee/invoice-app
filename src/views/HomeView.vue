@@ -12,9 +12,9 @@ const hasNoInvoice = computed(() => {
 router = useRouter(),
 viewInvoice = (id: string) => router.push({name: 'invoice', params: {id}})
 
-onMounted(async () => {
+onMounted(() => {
   if (!store.invoices.length) {
-    await store.getInvoices();
+    store.getInvoices();
   }
 })
 </script>

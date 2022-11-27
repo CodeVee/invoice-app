@@ -104,9 +104,9 @@ import { store } from '@/store';
     goHome = () => router.push({name: 'home'}),
     editInvoice = () => store.toggleFormMode(state.invoice)
 
-    onMounted(async () => {
+    onMounted(() => {
         if (!store.invoices.length) {
-            await store.getInvoices();
+            store.getInvoices();
         }
         
         const selectedInvoice = store.invoices.find(i => i.id === props.id);
