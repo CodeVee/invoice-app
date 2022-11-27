@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import TextBox from './TextBox.vue';
 import AppButton from './AppButton.vue';
-import { formatAmount } from '@/helpers/main.helper';
+import { formatAmount } from '@/helpers';
 
 interface Props {
     editMode: boolean

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Invoice } from '@/models/invoice';
-import { formatAmount, formatDate } from '@/helpers/main.helper';
+import { formatAmount, formatDate } from '@/helpers';
 import InvoiceStatus from './InvoiceStatus.vue';
 
 interface Props {
