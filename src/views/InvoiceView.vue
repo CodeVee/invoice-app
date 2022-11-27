@@ -11,7 +11,7 @@
             </div>
             <div class="flex gap-0.8">
                 <AppButton text="Edit" type="tetiary" @btn-click="editInvoice"/>
-                <AppButton text="Delete" type="secondary"/>
+                <AppButton text="Delete" type="secondary" @btn-click="deleteInvoice"/>
                 <AppButton text="Mark as Paid" type="primary"/>
             </div> 
         </div>
@@ -88,7 +88,7 @@ import AppButton from '@/components/AppButton.vue';
 import InvoiceStatus from '@/components/InvoiceStatus.vue';
 import  type { Invoice } from '@/models/invoice';
 import { formatAmount, formatDate } from '@/helpers';
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
 import { store } from '@/store';
 
@@ -96,13 +96,14 @@ import { store } from '@/store';
         id: string
     }
     interface State {
-        invoice?: Invoice
+        invoice?: Invoice,
     }
     const props = defineProps<Props>(),
     state = reactive<State>({}),
     router = useRouter(),
     goHome = () => router.push({name: 'home'}),
-    editInvoice = () => store.toggleFormMode(state.invoice)
+    editInvoice = () => store.toggleFormMode(state.invoice),
+    deleteInvoice = () => store.toggleModalMode()
 
     onMounted(() => {
         if (!store.invoices.length) {
@@ -114,6 +115,9 @@ import { store } from '@/store';
             goHome();
             return;
         }
-        state.invoice = selectedInvoice
+        state.invoice = selectedInvoice;
+        store.setInvoice(selectedInvoice);
     })
+
+    onBeforeUnmount(() => store.setInvoice())
 </script>

@@ -6,31 +6,35 @@ interface Store {
     formMode: boolean;
     darkMode: boolean;
     editMode: boolean;
+    showOverlay: boolean;
+    modalMode: boolean;
     invoices: Invoice[];
     selectedInvoice?: Invoice;
     toggleFormMode(invoice?: Invoice): void;
-    toggleDarkMode(): void,
-    getInvoices(): void
+    toggleDarkMode(): void;
+    toggleModalMode(): void;
+    getInvoices(): void;
+    closeBackDrop(): void;
+    handleForm(): void;
+    setInvoice(invoice?: Invoice): void;
 }
 
 export const store = reactive<Store>({
   formMode: false,
   darkMode: false,
   editMode: false,
+  modalMode: false,
+  showOverlay: false,
   invoices: [],
 
-  toggleFormMode(invoice?: Invoice) {
-    this.formMode = !this.formMode
-
-    if (this.formMode) {
-        this.editMode = !!invoice;
-        this.selectedInvoice = invoice ? invoice : {...DefaultInvoice}
-    }
-
-    if (!this.formMode) {
-        this.editMode = false;
-        this.selectedInvoice = undefined
-    }
+  toggleFormMode() {
+    this.formMode = !this.formMode;
+    this.showOverlay = this.formMode;
+    this.handleForm();
+  },
+  toggleModalMode() {
+    this.modalMode = !this.formMode;
+    this.showOverlay = this.modalMode;
   },
   
   toggleDarkMode() {
@@ -40,5 +44,33 @@ export const store = reactive<Store>({
   getInvoices() {
     const invoices = jsonInvoices as Invoice[]; 
     this.invoices = invoices
+  },
+
+  closeBackDrop() {
+    this.showOverlay = false;
+    this.modalMode = false;
+    this.formMode = false;
+    this.handleForm();
+  },
+
+  handleForm() {
+    if (this.formMode ) {
+
+      if (this.selectedInvoice) 
+        this.editMode = true
+      else {
+        this.editMode = false;
+        this.selectedInvoice = { ...DefaultInvoice}
+      }
+        
+    }
+
+    if (!this.formMode) {
+        this.editMode = false;
+    }
+  },
+
+  setInvoice(invoice?: Invoice) {
+    this.selectedInvoice = invoice
   }
 })
