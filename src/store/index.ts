@@ -5,23 +5,31 @@ interface Store {
     formMode: boolean;
     darkMode: boolean;
     editMode: boolean;
-    invoice: Invoice;
-    toggleFormMode(): void;
-    toggleDarkMode(): void
-    setEditMode(invoice: Invoice): void
+    invoices: Invoice[];
+    selectedInvoice: Invoice | null;
+    toggleFormMode(invoice?: Invoice): void;
+    toggleDarkMode(): void,
+    getInvoices(): Promise<void>
 }
 
 export const store = reactive<Store>({
   formMode: false,
   darkMode: false,
   editMode: false,
-  invoice: { ... DefaultInvoice},
+  invoices: [],
+  selectedInvoice: null,
 
-  toggleFormMode() {
+  toggleFormMode(invoice?: Invoice) {
     this.formMode = !this.formMode
+
+    if (this.formMode) {
+        this.editMode = !!invoice;
+        this.selectedInvoice = invoice ? invoice : {...DefaultInvoice}
+    }
+
     if (!this.formMode) {
         this.editMode = false;
-        this.invoice = { ... DefaultInvoice}
+        this.selectedInvoice = null
     }
   },
   
@@ -29,9 +37,9 @@ export const store = reactive<Store>({
     this.darkMode = !this.darkMode
   },
 
-  setEditMode(invoice: Invoice) {
-    this.editMode = true;
-    this.formMode = true;
-    this.invoice = invoice
+  async getInvoices() {
+    const data = await fetch('/invoices.json');
+    const invoices = await data.json() as Invoice[]; 
+    this.invoices = invoices
   }
 })

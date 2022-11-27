@@ -86,7 +86,7 @@
 <script setup lang="ts">
 import AppButton from '@/components/AppButton.vue';
 import InvoiceStatus from '@/components/InvoiceStatus.vue';
-import { DefaultInvoice, type Invoice } from '@/models/invoice';
+import  type { Invoice } from '@/models/invoice';
 import { formatAmount, formatDate } from '@/helpers/main.helper';
 import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
@@ -96,21 +96,20 @@ import { store } from '@/store';
         id: string
     }
     interface State {
-        invoice: Invoice | null
+        invoice: Invoice | undefined
     }
     const props = defineProps<Props>(),
-    state = reactive<State>({ invoice: null }),
+    state = reactive<State>({ invoice: undefined }),
     router = useRouter(),
     goHome = () => router.push({name: 'home'}),
-    editInvoice = () => {
-        store.setEditMode(state.invoice ? state.invoice : { ...DefaultInvoice})
-    };
+    editInvoice = () => store.toggleFormMode(state.invoice)
 
     onMounted(async () => {
-        const data = await fetch('/invoices.json');
-        const invoices = await data.json() as Invoice[]; 
+        if (!store.invoices.length) {
+            await store.getInvoices();
+        }
         
-        const selectedInvoice = invoices.find(i => i.id === props.id);
+        const selectedInvoice = store.invoices.find(i => i.id === props.id);
         if (!selectedInvoice) {
             goHome();
             return;
