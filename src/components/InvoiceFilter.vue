@@ -5,17 +5,17 @@
             <img :class="{'rotate-180': state.showDropdown}" class="self-center" src="@/assets/images/icon-arrow-down.svg" alt="down arrow">
         </button>
         <Transition name="dropdown">
-            <div v-show="state.showDropdown" class="absolute top-16 w-full p-2.4 rounded-xls bg-white shadow-lgs flex flex-col gap-1.6">
-            <label v-for="status in state.statuses" class="inline-flex cursor-pointer" :for="status">
-                <input  
-                    :id="status" 
-                    :value="status"
-                    v-model="state.checkedStatus"
-                    type="checkbox"
-                    class="rounded cursor-pointer  checked:text-purple focus:ring-offset-0 focus:ring-transparent border border-purple bg-blue-light h-1.6 w-1.6 " />
-                <span class="text-fl text-blue-vdark ml-1.2 self-center font-bold">{{ capitalizeFirstLetter(status) }}</span>
-            </label>
-        </div>
+            <div v-show="state.showDropdown" class="absolute top-16 w-full p-2.4 rounded-xls bg-white dark:bg-blue-dark shadow-lgs flex flex-col gap-1.6">
+                <label v-for="status in state.statuses" class="inline-flex cursor-pointer group" :for="status">
+                    <input  
+                        :id="status" 
+                        :value="status"
+                        v-model="state.checkedStatus"
+                        type="checkbox"
+                        class="rounded cursor-pointer  checked:text-purple focus:ring-offset-0 focus:ring-transparent border-0 group-hover:border group-hover:border-purple bg-blue-light dark:bg-blue-vdark h-1.6 w-1.6 " />
+                    <span class="text-fl text-blue-vdark dark:text-white ml-1.2 self-center font-bold">{{ capitalizeFirstLetter(status) }}</span>
+                </label>
+            </div>
         </Transition>
         
     </div>
