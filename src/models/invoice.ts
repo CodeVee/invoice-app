@@ -6,7 +6,7 @@ export interface Invoice {
   paymentTerms: number;
   clientName: string;
   clientEmail: string;
-  status: 'paid' | 'pending' | 'draft';
+  status: status;
   senderAddress: {
     street: string;
     city: string;
@@ -52,3 +52,5 @@ export const DefaultInvoice: Invoice = {
   items: [],
   total: 0,
 }
+
+export type status = 'paid' | 'pending' | 'draft'
