@@ -7,10 +7,11 @@
 </template>
 
 <script setup lang="ts">
+import type { status } from '@/models/invoice';
 import { computed } from 'vue';
 
 interface Props {
-    status: 'paid' | 'pending' | 'draft'
+    status: status
 }
 const props = defineProps<Props>(),
 statusColors = computed(() => {

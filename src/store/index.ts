@@ -1,4 +1,4 @@
-import { DefaultInvoice, type Invoice } from '@/models/invoice';
+import { DefaultInvoice, type Invoice, type status } from '@/models/invoice';
 import { reactive } from 'vue'
 import jsonInvoices from '@/data/invoices.json'
 
@@ -9,6 +9,8 @@ interface Store {
     showOverlay: boolean;
     modalMode: boolean;
     invoices: Invoice[];
+    filteredInvoices: Invoice[];
+    filterStatus: status[];
     selectedInvoice?: Invoice;
     toggleFormMode(invoice?: Invoice): void;
     toggleDarkMode(): void;
@@ -17,6 +19,8 @@ interface Store {
     closeBackDrop(): void;
     handleForm(): void;
     setInvoice(invoice?: Invoice): void;
+    setStatus(status: status[]): void;
+    filterInvoices(): void;
 }
 
 export const store = reactive<Store>({
@@ -26,6 +30,8 @@ export const store = reactive<Store>({
   modalMode: false,
   showOverlay: false,
   invoices: [],
+  filteredInvoices: [],
+  filterStatus: [],
 
   toggleFormMode() {
     this.formMode = !this.formMode;
@@ -43,7 +49,8 @@ export const store = reactive<Store>({
 
   getInvoices() {
     const invoices = jsonInvoices as Invoice[]; 
-    this.invoices = invoices
+    this.invoices = invoices;
+    this.filteredInvoices = [...invoices];
   },
 
   closeBackDrop() {
@@ -72,5 +79,17 @@ export const store = reactive<Store>({
 
   setInvoice(invoice?: Invoice) {
     this.selectedInvoice = invoice
+  },
+
+  setStatus(status: status[]) {
+    this.filterStatus = [...status]
+  },
+
+  filterInvoices() {
+    if (this.filterStatus.length) {
+      this.filteredInvoices = this.invoices.filter(i => this.filterStatus.includes(i.status));
+    } else {
+      this.filteredInvoices = [...this.invoices];
+    }
   }
 })
