@@ -2,7 +2,7 @@
     <div v-if="state.invoice">
         <button class="flex" @click="goHome">
             <img class="self-center" src="@/assets/images/icon-arrow-left.svg" alt="left arrow">
-            <span class="text-black dark:text-white text-fl ml-16 font-bold">Go back</span>
+            <span class="text-black dark:text-white hover:text-blue-gray dark:hover:text-blue-vgray text-fl ml-16 font-bold">Go back</span>
         </button>
         <div class="bg-white dark:bg-blue-vdark h-[8.8rem] px-3.2 flex justify-between items-center shadow-lgs rounded-xls mt-3.2 mb-2.4">
             <div class="flex gap-1.6">

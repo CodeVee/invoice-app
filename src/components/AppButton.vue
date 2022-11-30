@@ -18,11 +18,12 @@ emits = defineEmits<Emits>(),
 btnClass = computed(() => {
     switch (props.type) {
         case 'primary':
-            return 'text-white bg-purple';
+            return 'text-white bg-purple hover:bg-purple-light';
         case 'secondary':
-            return 'text-white bg-red';
+            return 'text-white bg-red hover:bg-red-light';
         default:
-            return 'text-blue-gray dark:text-blue-light bg-blue-vlight dark:bg-blue-dark';
+            return `text-blue-gray dark:text-blue-light bg-blue-vlight dark:bg-blue-dark 
+            hover:bg-blue-light dark:hover:bg-white dark:hover:text-blue-gray `;
     }
 }),
 press = () => emits('btnClick')

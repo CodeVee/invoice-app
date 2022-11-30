@@ -17,7 +17,7 @@ viewMore = () => emits('select');
 </script>
 
 <template>
-    <div @click="viewMore" class="bg-white dark:bg-blue-vdark flex items-center h-[7.2rem] shadow-lgs pl-[3.2rem] pr-[2.4rem] rounded-xls cursor-pointer active:scale-[.99]">
+    <div @click="viewMore" class="bg-white dark:bg-blue-vdark hover:border hover:border-purple flex items-center h-[7.2rem] shadow-lgs pl-[3.2rem] pr-[2.4rem] rounded-xls cursor-pointer active:scale-[.99]">
         <h3 class="text-fl font-bold basis-[10.3rem]">
             <span class="text-blue-gray">#</span>
             <span class=" text-black dark:text-white">{{invoice.id}}</span>
