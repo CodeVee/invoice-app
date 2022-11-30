@@ -1,5 +1,5 @@
 <template>
-    <div class="relative mr-auto h-16 w-[10.4rem] flex items-center justify-center gap-0.8">
+    <div class="relative h-16 w-[10.4rem] flex items-center justify-center gap-0.8">
         <div :class="statusColors.bgColor" class="absolute w-full h-full opacity-5 rounded-lgs"></div>
         <span :class="statusColors.bgColor" class="h-0.8 w-0.8 rounded-full"></span>
         <span :class="statusColors.textColor" class="capitalize text-fl font-bold">{{status}}</span>
