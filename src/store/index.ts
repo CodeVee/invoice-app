@@ -11,7 +11,7 @@ interface Store {
     invoices: Invoice[];
     filteredInvoices: Invoice[];
     filterStatus: status[];
-    selectedInvoice?: Invoice;
+    selectedInvoice: Invoice;
     toggleFormMode(invoice?: Invoice): void;
     toggleDarkMode(): void;
     toggleModalMode(): void;
@@ -32,6 +32,7 @@ export const store = reactive<Store>({
   invoices: [],
   filteredInvoices: [],
   filterStatus: [],
+  selectedInvoice: { ...DefaultInvoice},
 
   toggleFormMode() {
     this.formMode = !this.formMode;
@@ -57,27 +58,22 @@ export const store = reactive<Store>({
     this.showOverlay = false;
     this.modalMode = false;
     this.formMode = false;
+    this.editMode = false;
     this.handleForm();
   },
 
   handleForm() {
-    if (this.formMode ) {
-
-      if (this.selectedInvoice) 
-        this.editMode = true
-      else {
-        this.editMode = false;
-        this.selectedInvoice = { ...DefaultInvoice}
-      }
-        
+    if (this.formMode && !!this.selectedInvoice.id) {
+      this.editMode = true
     }
 
     if (!this.formMode) {
-        this.editMode = false;
+      this.editMode = false;
+      this.selectedInvoice = { ...DefaultInvoice}
     }
   },
 
-  setInvoice(invoice?: Invoice) {
+  setInvoice(invoice: Invoice) {
     this.selectedInvoice = invoice
   },
 

@@ -14,7 +14,7 @@
             <div class="flex flex-col gap-2.4 mb-4.8">
                 <h4 class="text-fl font-bold text-purple">Bill To</h4>
                 <text-box label-text="Client's Name"/>
-                <text-box label-text="Client's Email"/>
+                <text-box label-text="Client's Email" placeholder="e.g. email@example.com"/>
                 <text-box label-text="Street Address" id="street2"/>
                 <div class="grid grid-cols-3 gap-x-2.4">
                     <text-box label-text="City" id="city2"/>
@@ -27,7 +27,7 @@
                     <text-box label-text="Invoice Date"/>
                     <text-box label-text="Payment Terms"/>
                 </div>
-                <text-box label-text="Project Description"/>
+                <text-box label-text="Project Description" placeholder="e.g. Graphic Design Service"/>
             </div>
             <div>
                 <h5 class="font-bold text-[1.8rem] leading-[3.2rem] -tracking-[0.38px] text-blue-vdeep">Item List</h5>
@@ -49,9 +49,14 @@
                     </div>
                     <button class="bg-blue-vlight dark:bg-blue-dark rounded-4ls h-4.8 text-blue-gray dark:text-blue-light font-bold text-fl">+ Add New Item</button>
                 </div>
-                <div class="flex justify-end gap-0.8">
+                <div v-if="editMode" class="flex justify-end gap-0.8">
                     <AppButton text="Cancel" type="tetiary" @btn-click="cancelForm"/>
                     <AppButton text="Save Changes" type="primary"/>
+                </div>
+                <div v-else class="flex">
+                    <AppButton text="Discard" type="tetiary" @btn-click="cancelForm"/>
+                    <AppButton text="Save as Draft" class="ml-auto mr-0.8" type="dark" @btn-click="cancelForm"/>
+                    <AppButton text="Save & Send" type="primary"/>
                 </div>
             </div>
         </form>
