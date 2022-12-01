@@ -8,7 +8,7 @@ import { computed } from 'vue';
 
 interface Props {
     text: string;
-    type: 'primary' | 'secondary' | 'tetiary'
+    type: 'primary' | 'secondary' | 'tetiary' | 'dark'
 }
 interface Emits {
     (e: 'btnClick'): void 
@@ -21,6 +21,8 @@ btnClass = computed(() => {
             return 'text-white bg-purple hover:bg-purple-light';
         case 'secondary':
             return 'text-white bg-red hover:bg-red-light';
+        case 'dark':
+            return 'text-blue-vgray dark:text-blue-light bg-blue-deep';
         default:
             return `text-blue-gray dark:text-blue-light bg-blue-vlight dark:bg-blue-dark 
             hover:bg-blue-light dark:hover:bg-white dark:hover:text-blue-gray `;
