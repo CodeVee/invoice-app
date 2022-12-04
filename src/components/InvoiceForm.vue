@@ -24,7 +24,7 @@
             </div>
             <div class="flex flex-col gap-2.4 mb-3.2">
                 <div class="grid grid-cols-2 gap-x-2.4">
-                    <app-textbox label-text="Invoice Date"/>
+                    <app-datepicker v-model="state.createdAt" label-text="Invoice Date" />
                     <app-select v-model="state.paymentTerms" :options="options" label-text="Payment Terms" />
                 </div>
                 <app-textbox label-text="Project Description" placeholder="e.g. Graphic Design Service" :has-error="v$.description.$error" v-model="v$.description.$model"/>
@@ -65,6 +65,7 @@
 import AppTextbox from './AppTextbox.vue';
 import AppButton from './AppButton.vue';
 import AppSelect from './AppSelect.vue';
+import AppDatepicker from './AppDatepicker.vue';
 import InvoiceItemForm from './InvoiceItemForm.vue';
 import { store } from '@/store';
 import { reactive, onBeforeMount, watch } from 'vue';

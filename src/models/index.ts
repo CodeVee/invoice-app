@@ -71,3 +71,24 @@ export interface Option {
   id: number;
   name: string;
 }
+
+export interface Month {
+  key: number;
+  days: number;
+  name: string;
+}
+
+export const Months: Month[] = [
+  { key: 0, days: 31, name: 'Jan'},
+  { key: 1, days: 28, name: 'Feb'},
+  { key: 2, days: 31, name: 'Mar'},
+  { key: 3, days: 30, name: 'Apr'},
+  { key: 4, days: 31, name: 'May'},
+  { key: 5, days: 30, name: 'Jun'},
+  { key: 6, days: 31, name: 'Jul'},
+  { key: 7, days: 31, name: 'Aug'},
+  { key: 8, days: 30, name: 'Sep'},
+  { key: 9, days: 31, name: 'Oct'},
+  { key: 10, days: 30, name: 'Nov'},
+  { key: 11, days: 31, name: 'Dec'},
+]
