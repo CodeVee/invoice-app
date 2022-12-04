@@ -12,13 +12,13 @@ interface Store {
     filteredInvoices: Invoice[];
     filterStatus: status[];
     selectedInvoice: Invoice;
-    toggleFormMode(invoice?: Invoice): void;
+    toggleFormMode(): void;
     toggleDarkMode(): void;
     toggleModalMode(): void;
     getInvoices(): void;
     closeBackDrop(): void;
     handleForm(): void;
-    setInvoice(invoice?: Invoice): void;
+    setInvoice(invoice: Invoice): void;
     setStatus(status: status[]): void;
     filterInvoices(): void;
 }
@@ -69,7 +69,6 @@ export const store = reactive<Store>({
 
     if (!this.formMode) {
       this.editMode = false;
-      this.selectedInvoice = { ...DefaultInvoice}
     }
   },
 
