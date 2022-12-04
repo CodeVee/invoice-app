@@ -45,7 +45,7 @@
                         :index="index" 
                         @delete="removeItem"
                     />
-                    <button @click="addItem" class="bg-blue-vlight dark:bg-blue-dark rounded-4ls h-4.8 text-blue-gray dark:text-blue-light font-bold text-fl">+ Add New Item</button>
+                    <button @click="addItem" class="bg-blue-vlight hover:bg-blue-light dark:bg-blue-dark rounded-4ls h-4.8 text-blue-gray dark:text-blue-light font-bold text-fl">+ Add New Item</button>
                 </div>
                 <div v-if="editMode" class="flex justify-end gap-0.8">
                     <AppButton text="Cancel" type="tetiary" @btn-click="cancelForm"/>
@@ -56,7 +56,6 @@
                     <AppButton text="Save as Draft" class="ml-auto mr-0.8" type="dark" />
                     <AppButton text="Save & Send" type="primary" @btn-click="submitForm"/>
                 </div>
-                <pre>{{v$.$errors}}</pre>
             </div>
         </form>
     </div>
@@ -123,6 +122,7 @@ cancelForm = () => emits('cancel')
 
 onBeforeMount(() => {
     if (store.editMode) {
+        const now = Date.now();
         const { selectedInvoice } = store;
         state.id = selectedInvoice.id
         state.clientName = selectedInvoice.clientName
@@ -136,7 +136,10 @@ onBeforeMount(() => {
         state.senderAddress.city = selectedInvoice.senderAddress.city
         state.senderAddress.country = selectedInvoice.senderAddress.country
         state.description = selectedInvoice.description
-        state.items = selectedInvoice.items
+        state.items = selectedInvoice.items.map((item, i) => {
+            item.id = now + i;
+            return item;
+        })
     }
 })
 
