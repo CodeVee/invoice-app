@@ -4,30 +4,30 @@
         <form @submit.prevent="">        
             <div class="flex flex-col gap-2.4 mb-4.8">
                 <h4 class="text-fl font-bold text-purple">Bill From</h4>
-                <text-box label-text="Street Address" :has-error="v$.senderAddress.street.$error" v-model="v$.senderAddress.street.$model"/>
+                <app-textbox label-text="Street Address" :has-error="v$.senderAddress.street.$error" v-model="v$.senderAddress.street.$model"/>
                 <div class="grid grid-cols-3 gap-x-2.4">
-                    <text-box label-text="City" :has-error="v$.senderAddress.city.$error" v-model="v$.senderAddress.city.$model"/>
-                    <text-box label-text="Post Code" :has-error="v$.senderAddress.postCode.$error" v-model="v$.senderAddress.postCode.$model"/>
-                    <text-box label-text="Country" :has-error="v$.senderAddress.country.$error" v-model="v$.senderAddress.country.$model"/>
+                    <app-textbox label-text="City" :has-error="v$.senderAddress.city.$error" v-model="v$.senderAddress.city.$model"/>
+                    <app-textbox label-text="Post Code" :has-error="v$.senderAddress.postCode.$error" v-model="v$.senderAddress.postCode.$model"/>
+                    <app-textbox label-text="Country" :has-error="v$.senderAddress.country.$error" v-model="v$.senderAddress.country.$model"/>
                 </div>
             </div>
             <div class="flex flex-col gap-2.4 mb-4.8">
                 <h4 class="text-fl font-bold text-purple">Bill To</h4>
-                <text-box label-text="Client's Name" :has-error="v$.clientName.$error" v-model="v$.clientName.$model"/>
-                <text-box label-text="Client's Email" placeholder="e.g. email@example.com" :has-error="v$.clientEmail.$error" :error-message="v$.clientEmail.email.$invalid ? `invalid email` : ''" v-model="v$.clientEmail.$model"/>
-                <text-box label-text="Street Address" id="street2" :has-error="v$.clientAddress.street.$error"  v-model="v$.clientAddress.street.$model"/>
+                <app-textbox label-text="Client's Name" :has-error="v$.clientName.$error" v-model="v$.clientName.$model"/>
+                <app-textbox label-text="Client's Email" placeholder="e.g. email@example.com" :has-error="v$.clientEmail.$error" :error-message="v$.clientEmail.email.$invalid ? `invalid email` : ''" v-model="v$.clientEmail.$model"/>
+                <app-textbox label-text="Street Address" id="street2" :has-error="v$.clientAddress.street.$error"  v-model="v$.clientAddress.street.$model"/>
                 <div class="grid grid-cols-3 gap-x-2.4">
-                    <text-box label-text="City" id="city2" :has-error="v$.clientAddress.city.$error"  v-model="v$.clientAddress.city.$model"/>
-                    <text-box label-text="Post Code" id="post2" :has-error="v$.clientAddress.postCode.$error"  v-model="v$.clientAddress.postCode.$model"/>
-                    <text-box label-text="Country" id="country2" :has-error="v$.clientAddress.country.$error" v-model="v$.clientAddress.country.$model"/>
+                    <app-textbox label-text="City" id="city2" :has-error="v$.clientAddress.city.$error"  v-model="v$.clientAddress.city.$model"/>
+                    <app-textbox label-text="Post Code" id="post2" :has-error="v$.clientAddress.postCode.$error"  v-model="v$.clientAddress.postCode.$model"/>
+                    <app-textbox label-text="Country" id="country2" :has-error="v$.clientAddress.country.$error" v-model="v$.clientAddress.country.$model"/>
                 </div>
             </div>
             <div class="flex flex-col gap-2.4 mb-3.2">
                 <div class="grid grid-cols-2 gap-x-2.4">
-                    <text-box label-text="Invoice Date"/>
+                    <app-textbox label-text="Invoice Date"/>
                     <app-select v-model="state.paymentTerms" :options="options" label-text="Payment Terms" />
                 </div>
-                <text-box label-text="Project Description" placeholder="e.g. Graphic Design Service" :has-error="v$.description.$error" v-model="v$.description.$model"/>
+                <app-textbox label-text="Project Description" placeholder="e.g. Graphic Design Service" :has-error="v$.description.$error" v-model="v$.description.$model"/>
             </div>
             <div>
                 <h5 class="font-bold text-[1.8rem] leading-[3.2rem] -tracking-[0.38px] text-blue-vdeep">Item List</h5>
@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import TextBox from './TextBox.vue';
+import AppTextbox from './AppTextbox.vue';
 import AppButton from './AppButton.vue';
 import AppSelect from './AppSelect.vue';
 import InvoiceItemForm from './InvoiceItemForm.vue';
