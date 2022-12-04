@@ -25,7 +25,7 @@
             <div class="flex flex-col gap-2.4 mb-3.2">
                 <div class="grid grid-cols-2 gap-x-2.4">
                     <text-box label-text="Invoice Date"/>
-                    <text-box label-text="Payment Terms"/>
+                    <app-select v-model="state.paymentTerms" :options="options" label-text="Payment Terms" />
                 </div>
                 <text-box label-text="Project Description" placeholder="e.g. Graphic Design Service" :has-error="v$.description.$error" v-model="v$.description.$model"/>
             </div>
@@ -64,13 +64,16 @@
 <script setup lang="ts">
 import TextBox from './TextBox.vue';
 import AppButton from './AppButton.vue';
+import AppSelect from './AppSelect.vue';
 import InvoiceItemForm from './InvoiceItemForm.vue';
 import { store } from '@/store';
-import { reactive, onBeforeMount } from 'vue';
+import { reactive, onBeforeMount, watch } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
-import { getDefaultInvoice, type InvoiceItem } from '@/models/invoice';
+import { getDefaultInvoice, type InvoiceItem, type Option } from '@/models';
 import { computed } from '@vue/reactivity';
+import { add } from 'date-fns';
+import { formatFormDate } from '@/helpers';
 
 
 interface Emits {
@@ -98,7 +101,14 @@ rules = {
 },
 v$ = useVuelidate(rules, state),
 editMode = computed(() => !!state.id),
+options: Option[] = [
+    {id: 1, name: 'Net 1 Day'},
+    {id: 7, name: 'Net 7 Day'},
+    {id: 14, name: 'Net 14 Day'},
+    {id: 30, name: 'Net 30 Day'},
+],
 emits = defineEmits<Emits>(),
+
 addItem = () => {
     const item: InvoiceItem = {
         id: Date.now(),
@@ -111,6 +121,11 @@ addItem = () => {
 },
 removeItem = (index: number) => {
     state.items = state.items.filter((_, i) => index !== i);
+},
+setPaymentDueDate = () => {
+    const createdDate = new Date(state.createdAt);
+    const paymentDueDate = add(createdDate, { days: state.paymentTerms});
+    state.paymentDue = formatFormDate(paymentDueDate);
 },
 submitForm =  async () => {
   const vt = await v$.value.$validate();
@@ -135,17 +150,26 @@ onBeforeMount(() => {
         state.senderAddress.city = selectedInvoice.senderAddress.city
         state.senderAddress.country = selectedInvoice.senderAddress.country
         state.description = selectedInvoice.description
+        state.paymentTerms = selectedInvoice.paymentTerms
+        state.paymentDue = selectedInvoice.paymentDue
+        state.total = selectedInvoice.total
+        state.status = selectedInvoice.status
+        state.createdAt = selectedInvoice.createdAt
         state.items = selectedInvoice.items.map((item, i) => {
             item.id = now + i;
             return item;
         })
     }
 })
+watch(() => state.paymentTerms, () => setPaymentDueDate())
 
 </script>
 
 <style scoped>
 .bars {
     scrollbar-width: none;
+}
+.bars::-webkit-scrollbar {
+    display: none;
 }
 </style>

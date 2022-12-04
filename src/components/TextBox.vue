@@ -21,7 +21,7 @@
 <script setup lang="ts">
 
 interface Props {
-    modelValue?: any;
+    modelValue?: string | number;
     labelText?: string;
     id?: string;
     placeholder?: string
@@ -29,7 +29,7 @@ interface Props {
     errorMessage?: string; 
 }
 interface Emits {
-    (e: 'update:modelValue'): any
+    (e: 'update:modelValue', val: string | number): any
 }
 
 defineProps<Props>()
