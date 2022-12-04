@@ -7,24 +7,24 @@ export interface Invoice {
   clientName: string;
   clientEmail: string;
   status: status;
-  senderAddress: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-  };
-  clientAddress: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-  };
-  items: {
-      name: string;
-      quantity: number;
-      price: number;
-      total: number;
-    }[];
+  senderAddress: Address;
+  clientAddress: Address;
+  items: InvoiceItem[];
+  total: number;
+}
+
+interface Address {
+  street: string;
+  city: string;
+  postCode: string;
+  country: string;
+}
+
+export interface InvoiceItem {
+  id?: number;
+  name: string;
+  quantity: number;
+  price: number;
   total: number;
 }
 
@@ -52,5 +52,7 @@ export const DefaultInvoice: Invoice = {
   items: [],
   total: 0,
 }
+
+export const getDefaultInvoice = () => JSON.parse(JSON.stringify(DefaultInvoice)) as Invoice
 
 export type status = 'paid' | 'pending' | 'draft'
