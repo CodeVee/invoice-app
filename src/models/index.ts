@@ -1,3 +1,6 @@
+import { formatFormDate } from "@/helpers";
+import { add } from "date-fns";
+
 export interface Invoice {
   id: string;
   createdAt: string;
@@ -31,9 +34,9 @@ export interface InvoiceItem {
 export const DefaultInvoice: Invoice = {
   id: '',
   createdAt: '2022-11-24',
-  paymentDue: '2022-11-24',
+  paymentDue: '2022-11-25',
   description: '',
-  paymentTerms: 0,
+  paymentTerms: 1,
   clientName: '',
   clientEmail: '',
   status: 'draft',
@@ -53,6 +56,18 @@ export const DefaultInvoice: Invoice = {
   total: 0,
 }
 
-export const getDefaultInvoice = () => JSON.parse(JSON.stringify(DefaultInvoice)) as Invoice
+export const getDefaultInvoice = () => {
+  const today = new Date(),
+  createdAt = formatFormDate(today),
+  paymentDue = formatFormDate(add(today, { days: DefaultInvoice.paymentTerms }))
+  
+  const invoice = { ...DefaultInvoice, createdAt, paymentDue } as Invoice
+  return JSON.parse(JSON.stringify(invoice)) as Invoice
+}
 
 export type status = 'paid' | 'pending' | 'draft'
+
+export interface Option {
+  id: number;
+  name: string;
+}

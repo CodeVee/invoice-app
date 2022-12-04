@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Invoice } from '@/models/invoice';
+import type { Invoice } from '@/models';
 import { formatAmount, formatDate } from '@/helpers';
 import InvoiceStatus from './InvoiceStatus.vue';
 

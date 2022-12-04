@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import InvoiceFilter from './InvoiceFilter.vue';
-import type { status } from '@/models/invoice';
+import type { status } from '@/models';
 import { computed } from 'vue';
 import { store } from '@/store';
 

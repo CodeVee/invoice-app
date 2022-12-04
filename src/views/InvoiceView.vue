@@ -86,9 +86,9 @@
 <script setup lang="ts">
 import AppButton from '@/components/AppButton.vue';
 import InvoiceStatus from '@/components/InvoiceStatus.vue';
-import  type { Invoice } from '@/models/invoice';
+import  type { Invoice } from '@/models';
 import { formatAmount, formatDate } from '@/helpers';
-import { onMounted, reactive, onBeforeUnmount } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { store } from '@/store';
 

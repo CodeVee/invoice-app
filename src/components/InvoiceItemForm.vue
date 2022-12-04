@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import type { InvoiceItem } from '@/models/invoice';
+import type { InvoiceItem } from '@/models';
 import { formatAmount } from '@/helpers';
 import TextBox from './TextBox.vue';
 import { useVuelidate } from '@vuelidate/core'

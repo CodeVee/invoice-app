@@ -1,4 +1,4 @@
-import type { Invoice, status } from '@/models/invoice';
+import type { Invoice, status } from '@/models';
 import { reactive } from 'vue'
 import jsonInvoices from '@/data/invoices.json'
 
