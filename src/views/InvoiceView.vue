@@ -102,7 +102,10 @@ import { store } from '@/store';
     state = reactive<State>({}),
     router = useRouter(),
     goHome = () => router.push({name: 'home'}),
-    editInvoice = () => store.toggleFormMode(state.invoice),
+    editInvoice = () => {
+        store.setInvoice({...state.invoice} as Invoice)
+        store.toggleFormMode()
+    },
     deleteInvoice = () => store.toggleModalMode()
 
     onMounted(() => {
@@ -116,8 +119,5 @@ import { store } from '@/store';
             return;
         }
         state.invoice = selectedInvoice;
-        store.setInvoice(selectedInvoice);
     })
-
-    onBeforeUnmount(() => store.setInvoice())
 </script>
