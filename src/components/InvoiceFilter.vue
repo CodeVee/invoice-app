@@ -5,7 +5,7 @@
             <img :class="{'rotate-180': state.showDropdown}" class="self-center" src="@/assets/images/icon-arrow-down.svg" alt="down arrow">
         </button>
         <Transition name="dropdown">
-            <div v-show="state.showDropdown" class="absolute top-16 w-full p-2.4 rounded-xls bg-white dark:bg-blue-dark shadow-lgs flex flex-col gap-1.6">
+            <div v-show="state.showDropdown" class="absolute z-10 top-16 w-full p-2.4 rounded-xls bg-white dark:bg-blue-dark shadow-ls flex flex-col gap-1.6">
                 <label v-for="status in state.statuses" class="inline-flex cursor-pointer group" :for="status">
                     <input  
                         :id="status" 

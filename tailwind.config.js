@@ -71,7 +71,8 @@ module.exports = {
         '4ls': '2.4rem'
       },
       boxShadow: {
-        lgs: '0px 10px 10px -10px rgba(72, 84, 159, 0.100397)'
+        lgs: '0px 10px 10px -10px rgba(72, 84, 159, 0.100397)',
+        ls: '0px 10px 20px rgba(72, 84, 159, 0.25)'
       },
       spacing: {
         0.8: '0.8rem',
