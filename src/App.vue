@@ -51,4 +51,13 @@
   opacity: 0;
 }
 
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: 0.2s ease all;
+}
+.dropdown-enter-from,
+.dropdown-leave-to {
+  transform: translateY(-2rem);
+  opacity: 0;
+}
 </style>

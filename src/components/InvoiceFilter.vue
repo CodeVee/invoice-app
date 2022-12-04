@@ -4,7 +4,7 @@
             <span class="mr-1.6 text-black dark:text-white font-bold text-fl">Filter by status</span>
             <img :class="{'rotate-180': state.showDropdown}" class="self-center" src="@/assets/images/icon-arrow-down.svg" alt="down arrow">
         </button>
-        <Transition name="dropdown">
+        <Transition name="filter">
             <div v-show="state.showDropdown" class="absolute z-10 top-16 w-full p-2.4 rounded-xls bg-white dark:bg-blue-dark shadow-ls flex flex-col gap-1.6">
                 <label v-for="status in state.statuses" class="inline-flex cursor-pointer group" :for="status">
                     <input  
@@ -59,12 +59,12 @@ watch(() => state.checkedStatus, (newStatus) => {
 </script>
 
 <style scoped>
-.dropdown-enter-active,
-.dropdown-leave-active {
+.filter-enter-active,
+.filter-leave-active {
   transition: 0.5s ease all;
 }
-.dropdown-enter-from,
-.dropdown-leave-to {
+.filter-enter-from,
+.filter-leave-to {
   transform: translateY(-2rem);
   opacity: 0;
 }
