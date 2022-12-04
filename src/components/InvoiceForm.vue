@@ -70,16 +70,14 @@ import { reactive, onBeforeMount } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
 import { getDefaultInvoice, type InvoiceItem } from '@/models/invoice';
+import { computed } from '@vue/reactivity';
 
-interface Props {
-    editMode: boolean
-}
+
 interface Emits {
     (e: 'cancel'): void
 }
 
-const props = defineProps<Props>(),
-state = reactive({...getDefaultInvoice()}),
+const state = reactive({...getDefaultInvoice()}),
 rules = {
     senderAddress: {
         street: { required },
@@ -99,6 +97,7 @@ rules = {
     items: { required }
 },
 v$ = useVuelidate(rules, state),
+editMode = computed(() => !!state.id),
 emits = defineEmits<Emits>(),
 addItem = () => {
     const item: InvoiceItem = {
@@ -121,7 +120,7 @@ submitForm =  async () => {
 cancelForm = () => emits('cancel')
 
 onBeforeMount(() => {
-    if (store.editMode) {
+    if (store.selectedInvoice) {
         const now = Date.now();
         const { selectedInvoice } = store;
         state.id = selectedInvoice.id

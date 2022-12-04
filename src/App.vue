@@ -19,7 +19,7 @@
             @close="store.closeBackDrop()"/>
       </Transition>
       <Transition>
-          <InvoiceForm v-if="store.formMode" :edit-mode="store.editMode" @cancel="store.toggleFormMode()" />
+          <InvoiceForm v-if="store.formMode" @cancel="store.toggleFormMode()" />
       </Transition>
       <SideBar :dark-mode="store.darkMode" @toggle="store.toggleDarkMode()" />
       <main class="flex-1 py-[6.4rem] overflow-y-scroll">
