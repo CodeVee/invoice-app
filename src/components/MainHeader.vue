@@ -5,7 +5,7 @@
             <h2 class="text-blue-vgray dark:text-blue-light text-fl font-medium">{{invoiceMessage}}</h2>
         </div>
         <invoice-filter :status="store.filterStatus" @status-change="filterInvoices"/>
-        <button @click="store.toggleFormMode()" class="w-[15rem] h-[4.8rem] px-0.8 rounded-[2.4rem] bg-purple hover:bg-purple-light flex items-center">
+        <button @click="addInvoice" class="w-[15rem] h-[4.8rem] px-0.8 rounded-[2.4rem] bg-purple hover:bg-purple-light flex items-center">
             <span class="w-3.2 h-3.2 rounded-full bg-white flex justify-center items-center">
                 <img src="@/assets/images/icon-plus.svg" alt="plus">
             </span>
@@ -37,5 +37,6 @@ import { store } from '@/store';
     filterInvoices = (status: status[]) => {
         store.setStatus(status);
         store.filterInvoices();
-    }
+    },
+    addInvoice = () => store.toggleFormMode()
 </script>
