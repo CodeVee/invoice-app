@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white dark:bg-black-off w-[71.9rem] h-full absolute z-10 top-0 left-0 rounded-r-4xl pt-5.6 pr-5.6 pb-3.2 pl-[15.6rem] overflow-y-auto bars">
+    <div class="bg-white dark:bg-black-off w-[61.6rem] lg:w-[71.9rem] h-[calc(100vh_-_8rem)] lg:h-full absolute z-10 top-32 lg:top-0 left-0 rounded-r-4xl pt-5.6 pr-5.6 pb-3.2 pl-5.6 lg:pl-[15.6rem] overflow-y-auto bars">
         <h3 class="text-black dark:text-white font-bold text-ts mb-4.8">{{editMode? `Edit #${state.id}` : 'New Invoice'}}</h3>
         <form @submit.prevent="">        
             <div class="flex flex-col gap-2.4 mb-4.8">

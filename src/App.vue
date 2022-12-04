@@ -8,7 +8,7 @@
 
 <template>
   <div :class="{'dark': store.darkMode}">
-    <div class="bg-white-off dark:bg-black-off h-screen flex relative overlay">
+    <div class="bg-white-off dark:bg-black-off h-screen flex flex-col lg:flex-row relative overlay">
       <div v-show="store.showOverlay" class="absolute z-10 top-0 left-0 w-full h-full">
         <div @click="store.closeBackDrop()" class="bg-black w-full h-full opacity-50"></div>
       </div>
@@ -22,8 +22,8 @@
           <InvoiceForm v-if="store.formMode" @cancel="store.toggleFormMode()" />
       </Transition>
       <SideBar :dark-mode="store.darkMode" @toggle="store.toggleDarkMode()" />
-      <main class="flex-1 py-[6.4rem] overflow-y-scroll">
-        <div class="w-[73rem] mx-auto ">
+      <main class="lg:flex-1 lg:overflow-y-scroll">
+        <div class="w-full lg:w-[73rem] lg:mx-auto ">
           <RouterView />
         </div>   
       </main>   

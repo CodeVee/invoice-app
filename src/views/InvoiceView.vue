@@ -1,5 +1,5 @@
 <template>
-    <div v-if="state.invoice">
+    <div class="w-[68.8rem] mx-auto pt-4.8 lg:pt-[6.4rem] lg:pb-[5.4rem] lg:w-full lg:mx-0" v-if="state.invoice">
         <button class="flex" @click="goHome">
             <img class="self-center" src="@/assets/images/icon-arrow-left.svg" alt="left arrow">
             <span class="text-black dark:text-white hover:text-blue-gray dark:hover:text-blue-vgray text-fl ml-16 font-bold">Go back</span>
@@ -15,7 +15,7 @@
                 <AppButton text="Mark as Paid" type="primary"/>
             </div> 
         </div>
-        <div class="bg-white dark:bg-blue-vdark shadow-lgs rounded-xls p-4.8">
+        <div class="bg-white dark:bg-blue-vdark shadow-lgs rounded-xls px-3.2 pt-4.8 pb-3.2 lg:p-4.8">
             <div class="flex justify-between mb-[2.1rem]">
                 <div class="flex flex-col">
                     <h4 class="font-bold text-sl">
