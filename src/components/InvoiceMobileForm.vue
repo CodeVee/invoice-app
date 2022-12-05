@@ -1,48 +1,44 @@
 <template>
-    <div class="bg-white dark:bg-black-off w-[61.6rem] lg:w-[71.9rem] h-[calc(100vh_-_8rem)] lg:h-full absolute z-10 top-32 lg:top-0 left-0 rounded-r-4xl pt-5.6 pr-5.6 pb-3.2 pl-5.6 lg:pl-[15.6rem] overflow-y-auto bars">
-        <h3 v-if="editMode" class="font-bold text-ts mb-4.8">
+    <div class="bg-white dark:bg-black-off pt-3.2 px-2.4">
+        <button class="flex" @click="cancelForm">
+            <img class="self-center" src="@/assets/images/icon-arrow-left.svg" alt="left arrow">
+            <span class="text-black dark:text-white hover:text-blue-gray dark:hover:text-blue-vgray text-fl ml-2.4 md:ml-16 font-bold">Go back</span>
+        </button>
+        <h3 v-if="editMode" class="font-bold text-ts my-2.4">
             <span class="text-black dark:text-white">Edit </span>
             <span class="text-blue-vgray">#</span>
             <span class="text-black dark:text-white">{{state.id}}</span>
         </h3>
-        <h3 v-else class="text-black dark:text-white font-bold text-ts mb-4.8">New Invoice</h3>
+        <h3 v-else class="text-black dark:text-white font-bold text-ts my-2.4">New Invoice</h3>
         <form @submit.prevent="">        
-            <div class="flex flex-col gap-2.4 mb-4.8">
+            <div class="flex flex-col gap-2.4 mb-16">
                 <h4 class="text-fl font-bold text-purple">Bill From</h4>
                 <app-textbox label-text="Street Address" :has-error="v$.senderAddress.street.$error" v-model="v$.senderAddress.street.$model"/>
-                <div class="grid grid-cols-3 gap-x-2.4">
+                <div class="grid grid-cols-2 gap-x-2.4">
                     <app-textbox label-text="City" :has-error="v$.senderAddress.city.$error" v-model="v$.senderAddress.city.$model"/>
                     <app-textbox label-text="Post Code" :has-error="v$.senderAddress.postCode.$error" v-model="v$.senderAddress.postCode.$model"/>
-                    <app-textbox label-text="Country" :has-error="v$.senderAddress.country.$error" v-model="v$.senderAddress.country.$model"/>
                 </div>
+                <app-textbox label-text="Country" :has-error="v$.senderAddress.country.$error" v-model="v$.senderAddress.country.$model"/>
             </div>
-            <div class="flex flex-col gap-2.4 mb-4.8">
+            <div class="flex flex-col gap-2.4 mb-16">
                 <h4 class="text-fl font-bold text-purple">Bill To</h4>
                 <app-textbox label-text="Client's Name" :has-error="v$.clientName.$error" v-model="v$.clientName.$model"/>
                 <app-textbox label-text="Client's Email" placeholder="e.g. email@example.com" :has-error="v$.clientEmail.$error" :error-message="v$.clientEmail.email.$invalid ? `invalid email` : ''" v-model="v$.clientEmail.$model"/>
                 <app-textbox label-text="Street Address" id="street2" :has-error="v$.clientAddress.street.$error"  v-model="v$.clientAddress.street.$model"/>
-                <div class="grid grid-cols-3 gap-x-2.4">
+                <div class="grid grid-cols-2 gap-x-2.4">
                     <app-textbox label-text="City" id="city2" :has-error="v$.clientAddress.city.$error"  v-model="v$.clientAddress.city.$model"/>
                     <app-textbox label-text="Post Code" id="post2" :has-error="v$.clientAddress.postCode.$error"  v-model="v$.clientAddress.postCode.$model"/>
-                    <app-textbox label-text="Country" id="country2" :has-error="v$.clientAddress.country.$error" v-model="v$.clientAddress.country.$model"/>
                 </div>
+                <app-textbox label-text="Country" id="country2" :has-error="v$.clientAddress.country.$error" v-model="v$.clientAddress.country.$model"/>
             </div>
-            <div class="flex flex-col gap-2.4 mb-3.2">
-                <div class="grid grid-cols-2 gap-x-2.4">
-                    <app-datepicker v-model="state.createdAt" label-text="Invoice Date" />
-                    <app-select v-model="state.paymentTerms" :options="options" label-text="Payment Terms" />
-                </div>
+            <div class="flex flex-col gap-2.4 mb-5.6">
+                <app-datepicker v-model="state.createdAt" label-text="Invoice Date" />
+                <app-select v-model="state.paymentTerms" :options="options" label-text="Payment Terms" />
                 <app-textbox label-text="Project Description" placeholder="e.g. Graphic Design Service" :has-error="v$.description.$error" v-model="v$.description.$model"/>
             </div>
             <div>
-                <h5 class="font-bold text-[1.8rem] leading-[3.2rem] -tracking-[0.38px] text-blue-vdeep">Item List</h5>
-                <div class="grid grid-cols-[21rem_6.8rem_9rem_auto] gap-x-1.6 my-1.6">
-                    <span class="text-blue-gray dark:text-blue-light text-fl font-medium">Item Name</span>
-                    <span class="text-blue-gray dark:text-blue-light text-fl font-medium">Qty.</span>
-                    <span class="text-blue-gray dark:text-blue-light text-fl font-medium">Price</span>
-                    <span class="text-blue-gray dark:text-blue-light text-fl font-medium">Total</span>
-                </div>
-                <div class="flex flex-col gap-[1.8rem] mb-16">
+                <h5 class="mb-2.4 font-bold text-[1.8rem] leading-ls -tracking-[0.38px] text-blue-vdeep">Item List</h5>
+                <div class="flex flex-col gap-4.8 mb-2.4">
                     <InvoiceItemForm 
                         v-for="(item, index) in v$.items.$model" 
                         :key="item.id" 
@@ -52,15 +48,18 @@
                     />
                     <button @click="addItem" class="bg-blue-vlight hover:bg-blue-light dark:bg-blue-dark rounded-4ls h-4.8 text-blue-gray dark:text-blue-light font-bold text-fl">+ Add New Item</button>
                 </div>
-                <div v-if="editMode" class="flex justify-end gap-0.8">
-                    <AppButton text="Cancel" type="tetiary" @btn-click="cancelForm"/>
-                    <AppButton text="Save Changes" type="primary"/>
-                </div>
-                <div v-else class="flex">
-                    <AppButton text="Discard" type="tetiary" @btn-click="cancelForm"/>
-                    <AppButton text="Save as Draft" class="ml-auto mr-0.8" type="dark" />
-                    <AppButton text="Save & Send" type="primary" @btn-click="submitForm"/>
-                </div>
+                <div class="h-[6.4rem] lin-gra -mx-2.4"></div>
+                <div class="-mx-2.4 px-2.4 h-36 bg-white dark:bg-blue-vdark">
+                    <div v-if="editMode" class="flex h-full items-center justify-end gap-0.8">
+                        <AppButton text="Cancel" type="tetiary" @btn-click="cancelForm"/>
+                        <AppButton text="Save Changes" type="primary"/>
+                    </div>
+                    <div v-else class="flex h-full items-center shadow-lgs">
+                        <AppButton text="Discard" type="tetiary" @btn-click="cancelForm"/>
+                        <AppButton text="Save as Draft" class="ml-auto mr-0.8" type="dark" />
+                        <AppButton text="Save & Send" type="primary" @btn-click="submitForm"/>
+                    </div>
+                </div>                
             </div>
         </form>
     </div>
@@ -76,7 +75,7 @@ import { store } from '@/store';
 import { reactive, onBeforeMount, watch } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
-import { getDefaultInvoice, type InvoiceItem, type Option } from '@/models';
+import { getDefaultInvoice, type Invoice, type InvoiceItem, type Option } from '@/models';
 import { computed } from '@vue/reactivity';
 import { add } from 'date-fns';
 import { formatFormDate } from '@/helpers';
@@ -85,8 +84,12 @@ import { formatFormDate } from '@/helpers';
 interface Emits {
     (e: 'cancel'): void
 }
+interface Props {
+    invoice?: Invoice
+}
 
 const state = reactive({...getDefaultInvoice()}),
+props = defineProps<Props>(),
 rules = {
     senderAddress: {
         street: { required },
@@ -107,7 +110,7 @@ rules = {
 },
 v$ = useVuelidate(rules, state),
 editMode = computed(() => !!state.id),
-options = store.options,
+options = store.options, 
 emits = defineEmits<Emits>(),
 
 addItem = () => {
@@ -136,27 +139,27 @@ submitForm =  async () => {
 cancelForm = () => emits('cancel')
 
 onBeforeMount(() => {
-    if (store.selectedInvoice) {
+    if (props.invoice) {
         const now = Date.now();
-        const { selectedInvoice } = store;
-        state.id = selectedInvoice.id
-        state.clientName = selectedInvoice.clientName
-        state.clientEmail = selectedInvoice.clientEmail
-        state.clientAddress.street = selectedInvoice.clientAddress.street
-        state.clientAddress.postCode = selectedInvoice.clientAddress.postCode
-        state.clientAddress.city = selectedInvoice.clientAddress.city
-        state.clientAddress.country = selectedInvoice.clientAddress.country
-        state.senderAddress.street = selectedInvoice.senderAddress.street
-        state.senderAddress.postCode = selectedInvoice.senderAddress.postCode
-        state.senderAddress.city = selectedInvoice.senderAddress.city
-        state.senderAddress.country = selectedInvoice.senderAddress.country
-        state.description = selectedInvoice.description
-        state.paymentTerms = selectedInvoice.paymentTerms
-        state.paymentDue = selectedInvoice.paymentDue
-        state.total = selectedInvoice.total
-        state.status = selectedInvoice.status
-        state.createdAt = selectedInvoice.createdAt
-        state.items = selectedInvoice.items.map((item, i) => {
+        const { invoice } = props;
+        state.id = invoice.id
+        state.clientName = invoice.clientName
+        state.clientEmail = invoice.clientEmail
+        state.clientAddress.street = invoice.clientAddress.street
+        state.clientAddress.postCode = invoice.clientAddress.postCode
+        state.clientAddress.city = invoice.clientAddress.city
+        state.clientAddress.country = invoice.clientAddress.country
+        state.senderAddress.street = invoice.senderAddress.street
+        state.senderAddress.postCode = invoice.senderAddress.postCode
+        state.senderAddress.city = invoice.senderAddress.city
+        state.senderAddress.country = invoice.senderAddress.country
+        state.description = invoice.description
+        state.paymentTerms = invoice.paymentTerms
+        state.paymentDue = invoice.paymentDue
+        state.total = invoice.total
+        state.status = invoice.status
+        state.createdAt = invoice.createdAt
+        state.items = invoice.items.map((item, i) => {
             item.id = now + i;
             return item;
         })
@@ -167,10 +170,13 @@ watch(() => state.paymentTerms, () => setPaymentDueDate())
 </script>
 
 <style scoped>
-.bars {
+/* .bars {
     scrollbar-width: none;
 }
 .bars::-webkit-scrollbar {
     display: none;
+} */
+.lin-gra {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.1) 100%);
 }
 </style>

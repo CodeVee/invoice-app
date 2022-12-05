@@ -1,4 +1,4 @@
-import type { Invoice, status } from '@/models';
+import type { Invoice, Option, status } from '@/models';
 import { reactive } from 'vue'
 import jsonInvoices from '@/data/invoices.json'
 
@@ -11,6 +11,7 @@ interface Store {
     invoices: Invoice[];
     filteredInvoices: Invoice[];
     filterStatus: status[];
+    options: Option[];
     selectedInvoice: Invoice | null;
     toggleFormMode(): void;
     toggleDarkMode(): void;
@@ -32,6 +33,12 @@ export const store = reactive<Store>({
   filteredInvoices: [],
   filterStatus: [],
   selectedInvoice: null,
+  options: [
+    {id: 1, name: 'Net 1 Day'},
+    {id: 7, name: 'Net 7 Day'},
+    {id: 14, name: 'Net 14 Day'},
+    {id: 30, name: 'Net 30 Day'},
+  ],
 
   toggleFormMode() {
     this.formMode = !this.formMode;

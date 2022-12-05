@@ -27,9 +27,13 @@ import { useScreen } from 'vue-screen'
     interface Props { 
         invoiceCount: number
     }
+    interface Emits {
+        (e: 'open'): void
+    }
 
     const screen = useScreen(),
     props = defineProps<Props>(),
+    emits = defineEmits<Emits>(),
     isMobile = computed(() => screen.width < store.mobileWidth),
     invoiceMessage = computed(() => {
         switch (props.invoiceCount) {
@@ -57,7 +61,7 @@ import { useScreen } from 'vue-screen'
     },
     addInvoice = () => {
         if (isMobile.value) {
-            
+            emits('open')
         } else {
             store.toggleFormMode()
         }
