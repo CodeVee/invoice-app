@@ -1,11 +1,11 @@
 <template>
-    <div class="w-[19.2rem] flex justify-center relative">
+    <div class="w-40 md:w-[19.2rem] flex justify-center relative">
         <button @click="toggleDropdown" class="flex">
-            <span class="mr-1.6 text-black dark:text-white font-bold text-fl">Filter by status</span>
+            <span class="mr-1.2 md:mr-1.6 text-black dark:text-white font-bold text-fl">Filter <span class="hidden md:inline">by status</span></span>
             <img :class="{'rotate-180': state.showDropdown}" class="self-center" src="@/assets/images/icon-arrow-down.svg" alt="down arrow">
         </button>
         <Transition name="filter">
-            <div v-show="state.showDropdown" class="absolute z-10 top-16 w-full p-2.4 rounded-xls bg-white dark:bg-blue-dark shadow-ls flex flex-col gap-1.6">
+            <div v-show="state.showDropdown" class="absolute z-10 top-16 w-full p-1.2 md:p-2.4 rounded-xls bg-white dark:bg-blue-dark shadow-ls flex flex-col gap-1.6">
                 <label v-for="status in state.statuses" class="inline-flex cursor-pointer group" :for="status">
                     <input  
                         :id="status" 
