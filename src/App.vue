@@ -8,7 +8,7 @@
 
 <template>
   <div :class="{'dark': store.darkMode}">
-    <div class="bg-white-off dark:bg-black-off min-h-screen md:min-h-0 pb-5.6 md:pb-0 md:h-screen flex flex-col lg:flex-row relative overlay">
+    <div class="bg-white-off dark:bg-black-off min-h-screen md:min-h-0 md:pb-0 md:h-screen flex flex-col lg:flex-row relative overlay">
       <div v-show="store.showOverlay" class="absolute z-10 top-0 left-0 w-full h-full">
         <div @click="store.closeBackDrop()" class="bg-black w-full h-full opacity-50"></div>
       </div>

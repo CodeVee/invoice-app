@@ -20,7 +20,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="md:w-[67.2rem] mx-auto pt-3.2 md:pt-5.6 lg:pt-[7.2rem] lg:pb-[5.4rem] px-2.4 md:px-0 lg:w-full lg:mx-0">
+  <div class="md:w-[67.2rem] mx-auto pt-3.2 md:pt-5.6 pb-5.6 md:pb-0 lg:pt-[7.2rem] lg:pb-[5.4rem] px-2.4 md:px-0 lg:w-full lg:mx-0">
     <MainHeader :invoice-count="store.filteredInvoices.length"/>
     <div class="flex flex-col gap-1.6">
       <InvoiceCard v-for="invoice in store.filteredInvoices" :key="invoice.id" :invoice="invoice" @select="viewInvoice(invoice.id)" /> 

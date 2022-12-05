@@ -1,5 +1,5 @@
 <template>
-    <div class="md:w-[68.8rem] mx-auto px-2.4 md:px-0 pt-3.2 md:pt-4.8 lg:pt-[6.4rem] lg:pb-[5.4rem] lg:w-full lg:mx-0" v-if="state.invoice">
+    <div class="relative md:w-[68.8rem] mx-auto px-2.4 md:px-0 pt-3.2 md:pt-4.8 lg:pt-[6.4rem] lg:pb-[5.4rem] lg:w-full lg:mx-0" v-if="state.invoice">
         <button class="flex" @click="goHome">
             <img class="self-center" src="@/assets/images/icon-arrow-left.svg" alt="left arrow">
             <span class="text-black dark:text-white hover:text-blue-gray dark:hover:text-blue-vgray text-fl ml-2.4 md:ml-16 font-bold">Go back</span>
@@ -87,6 +87,11 @@
                 <span class="font-bold text-lg md:text-ls leading-ls">£ {{formatAmount(state.invoice.total)}}</span>
             </div>
         </div>
+        <div class="flex items-center justify-between px-2.4 -mx-2.4 md:hidden  bg-white h-36 mt-5.6">
+            <AppButton text="Edit" type="tetiary" />
+            <AppButton text="Delete" type="secondary" @btn-click="deleteInvoice"/>
+            <AppButton text="Mark as Paid" type="primary"/>
+        </div> 
     </div>
 </template>
 
