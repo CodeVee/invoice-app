@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref, Transition } from "vue";
+import { computed, onMounted, reactive, Transition } from "vue";
 import { Months } from '@/models';
 import { formatDate, formatFormDate } from "@/helpers";
 

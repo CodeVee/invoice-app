@@ -8,8 +8,7 @@
         (e: 'toggle'): void
     }
 
-    const name = 'SideBar',
-    props = defineProps<Props>(),
+    const props = defineProps<Props>(),
     emit = defineEmits<Emits>(),
     toggleMode = () => {
         emit('toggle');

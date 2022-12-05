@@ -76,7 +76,7 @@ import { store } from '@/store';
 import { reactive, onBeforeMount, watch } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
-import { getDefaultInvoice, type InvoiceItem, type Option } from '@/models';
+import { getDefaultInvoice, type InvoiceItem } from '@/models';
 import { computed } from '@vue/reactivity';
 import { add } from 'date-fns';
 import { formatFormDate } from '@/helpers';

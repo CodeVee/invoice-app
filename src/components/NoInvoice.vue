@@ -5,7 +5,3 @@
         <h4 class="text-blue-vgray font-medium text-fl text-center"> Create an invoice by clicking the <br><span class="font-bold">New  <span class="hidden md:inline">Invoice</span></span> button and get started</h4>
     </div>
 </template>
-
-<script setup lang="ts">
-
-</script>
