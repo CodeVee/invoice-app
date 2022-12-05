@@ -22,11 +22,15 @@ import InvoiceFilter from './InvoiceFilter.vue';
 import type { status } from '@/models';
 import { computed } from 'vue';
 import { store } from '@/store';
+import { useScreen } from 'vue-screen'
 
     interface Props { 
         invoiceCount: number
     }
-    const props = defineProps<Props>(),
+
+    const screen = useScreen(),
+    props = defineProps<Props>(),
+    isMobile = computed(() => screen.width < store.mobileWidth),
     invoiceMessage = computed(() => {
         switch (props.invoiceCount) {
             case 0:
@@ -51,5 +55,11 @@ import { store } from '@/store';
         store.setStatus(status);
         store.filterInvoices();
     },
-    addInvoice = () => store.toggleFormMode()
+    addInvoice = () => {
+        if (isMobile.value) {
+            
+        } else {
+            store.toggleFormMode()
+        }
+    }
 </script>

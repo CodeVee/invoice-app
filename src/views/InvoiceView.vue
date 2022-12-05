@@ -88,7 +88,7 @@
             </div>
         </div>
         <div class="flex items-center justify-between px-2.4 -mx-2.4 md:hidden  bg-white h-36 mt-5.6">
-            <AppButton text="Edit" type="tetiary" />
+            <AppButton text="Edit" type="tetiary" @click="editInvoice" />
             <AppButton text="Delete" type="secondary" @btn-click="deleteInvoice"/>
             <AppButton text="Mark as Paid" type="primary"/>
         </div> 
@@ -100,9 +100,10 @@ import AppButton from '@/components/AppButton.vue';
 import InvoiceStatus from '@/components/InvoiceStatus.vue';
 import  type { Invoice } from '@/models';
 import { formatAmount, formatDate } from '@/helpers';
-import { onMounted, reactive } from 'vue';
+import { computed, onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { store } from '@/store';
+import { useScreen } from 'vue-screen'
 
     interface Props { 
         id: string
@@ -110,13 +111,22 @@ import { store } from '@/store';
     interface State {
         invoice?: Invoice,
     }
-    const props = defineProps<Props>(),
+
+    const screen = useScreen(),
+    props = defineProps<Props>(),
+    isMobile = computed(() => screen.width < store.mobileWidth),
     state = reactive<State>({}),
     router = useRouter(),
     goHome = () => router.push({name: 'home'}),
     editInvoice = () => {
-        store.setInvoice({...state.invoice} as Invoice)
-        store.toggleFormMode()
+        
+        if (isMobile.value) {
+            
+        } else {
+            store.setInvoice({...state.invoice} as Invoice)
+            store.toggleFormMode()
+        }
+        
     },
     deleteInvoice = () => store.toggleModalMode()
 

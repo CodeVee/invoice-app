@@ -3,6 +3,7 @@ import { reactive } from 'vue'
 import jsonInvoices from '@/data/invoices.json'
 
 interface Store {
+    mobileWidth: number;
     formMode: boolean;
     darkMode: boolean;
     showOverlay: boolean;
@@ -22,6 +23,7 @@ interface Store {
 }
 
 export const store = reactive<Store>({
+  mobileWidth: 500,
   formMode: false,
   darkMode: false,
   modalMode: false,
