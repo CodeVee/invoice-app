@@ -3,25 +3,32 @@
   import SideBar from './components/SideBar.vue';
   import InvoiceForm from './components/InvoiceForm.vue';
   import DeleteModal from '@/components/DeleteModal.vue';
-  import { store } from './store'
+  import { useInvoiceStore, useAppStore } from './store'
+  import { storeToRefs } from 'pinia'
+
+  const istore = useInvoiceStore(),
+  astore = useAppStore(),
+  { selectedInvoice } = storeToRefs(istore),
+  { darkMode, showOverlay, modalMode, formMode } = storeToRefs(astore),
+  { closeBackDrop, toggleDarkMode, toggleFormMode } = astore;
 </script>
 
 <template>
-  <div :class="{'dark': store.darkMode}">
+  <div :class="{'dark': darkMode}">
     <div class="bg-white-off dark:bg-black-off min-h-screen md:min-h-0 md:pb-0 md:h-screen flex flex-col lg:flex-row relative overlay">
-      <div v-show="store.showOverlay" class="absolute z-10 top-0 left-0 w-full h-full">
-        <div @click="store.closeBackDrop()" class="bg-black w-full h-full opacity-50"></div>
+      <div v-show="showOverlay" class="absolute z-10 top-0 left-0 w-full h-full">
+        <div @click="closeBackDrop()" class="bg-black w-full h-full opacity-50"></div>
       </div>
       <Transition name="fade">
           <DeleteModal 
-            v-if="store.modalMode" 
-            :invoice-id="store.selectedInvoice?.id || ''"
-            @close="store.closeBackDrop()"/>
+            v-if="modalMode" 
+            :invoice-id="selectedInvoice?.id || ''"
+            @close="closeBackDrop()"/>
       </Transition>
       <Transition>
-          <InvoiceForm v-if="store.formMode" @cancel="store.toggleFormMode()" />
+          <InvoiceForm v-if="formMode" @cancel="toggleFormMode()" />
       </Transition>
-      <SideBar :dark-mode="store.darkMode" @toggle="store.toggleDarkMode()" />
+      <SideBar :dark-mode="darkMode" @toggle="toggleDarkMode()" />
       <main class="lg:flex-1 lg:overflow-y-scroll">
         <div class="w-full lg:w-[73rem] lg:mx-auto ">
           <RouterView />

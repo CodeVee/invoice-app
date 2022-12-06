@@ -21,7 +21,8 @@ import AppTextbox from './AppTextbox.vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, minValue, integer, decimal } from '@vuelidate/validators'
 import { reactive, watch, computed } from 'vue';
-import { store } from '@/store';
+import { useAppStore } from '@/store';
+import { storeToRefs } from 'pinia';
 import { useScreen } from 'vue-screen'
 
 interface Prop {
@@ -38,10 +39,12 @@ const rules = {
     price: { minValue: minValue(1), decimal }
 },
 screen = useScreen(),
+astore = useAppStore(),
+{ mobileWidth } = storeToRefs(astore),
 props = defineProps<Prop>(),
 emit = defineEmits<Emit>(),
 state = reactive({...props.item}),
-isMobile = computed(() => screen.width < store.mobileWidth),
+isMobile = computed(() => screen.width < mobileWidth.value),
 v$ = useVuelidate(rules, state),
 setTotal = () => {
     const total = state.price * state.quantity;

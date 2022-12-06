@@ -53,13 +53,13 @@
                     <button @click="addItem" class="bg-blue-vlight hover:bg-blue-light dark:bg-blue-dark rounded-4ls h-4.8 text-blue-gray dark:text-blue-light font-bold text-fl">+ Add New Item</button>
                 </div>
                 <div v-if="editMode" class="flex justify-end gap-0.8">
-                    <AppButton text="Cancel" type="tetiary" @btn-click="cancelForm"/>
-                    <AppButton text="Save Changes" type="primary"/>
+                    <app-button text="Cancel" type="tetiary" @btn-click="cancelForm"/>
+                    <app-button text="Save Changes" type="primary"/>
                 </div>
                 <div v-else class="flex">
-                    <AppButton text="Discard" type="tetiary" @btn-click="cancelForm"/>
-                    <AppButton text="Save as Draft" class="ml-auto mr-0.8" type="dark" />
-                    <AppButton text="Save & Send" type="primary" @btn-click="submitForm"/>
+                    <app-button text="Discard" type="tetiary" @btn-click="cancelForm"/>
+                    <app-button text="Save as Draft" class="ml-auto mr-0.8" type="dark" />
+                    <app-button text="Save & Send" type="primary" @btn-click="submitForm"/>
                 </div>
             </div>
         </form>
@@ -72,7 +72,8 @@ import AppButton from './AppButton.vue';
 import AppSelect from './AppSelect.vue';
 import AppDatepicker from './AppDatepicker.vue';
 import InvoiceItemForm from './InvoiceItemForm.vue';
-import { store } from '@/store';
+import { useInvoiceStore, useAppStore } from '@/store';
+import { storeToRefs } from 'pinia'
 import { reactive, onBeforeMount, watch } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
@@ -87,6 +88,10 @@ interface Emits {
 }
 
 const state = reactive({...getDefaultInvoice()}),
+istore = useInvoiceStore(),
+astore = useAppStore(),
+{ selectedInvoice } = storeToRefs(istore),
+{ options } = storeToRefs(astore),
 rules = {
     senderAddress: {
         street: { required },
@@ -107,7 +112,6 @@ rules = {
 },
 v$ = useVuelidate(rules, state),
 editMode = computed(() => !!state.id),
-options = store.options,
 emits = defineEmits<Emits>(),
 
 addItem = () => {
@@ -136,27 +140,27 @@ submitForm =  async () => {
 cancelForm = () => emits('cancel')
 
 onBeforeMount(() => {
-    if (store.selectedInvoice) {
+    if (selectedInvoice.value) {
+        state.id = selectedInvoice.value.id
+        state.clientName = selectedInvoice.value.clientName
+        state.clientEmail = selectedInvoice.value.clientEmail
+        state.clientAddress.street = selectedInvoice.value.clientAddress.street
+        state.clientAddress.postCode = selectedInvoice.value.clientAddress.postCode
+        state.clientAddress.city = selectedInvoice.value.clientAddress.city
+        state.clientAddress.country = selectedInvoice.value.clientAddress.country
+        state.senderAddress.street = selectedInvoice.value.senderAddress.street
+        state.senderAddress.postCode = selectedInvoice.value.senderAddress.postCode
+        state.senderAddress.city = selectedInvoice.value.senderAddress.city
+        state.senderAddress.country = selectedInvoice.value.senderAddress.country
+        state.description = selectedInvoice.value.description
+        state.paymentTerms = selectedInvoice.value.paymentTerms
+        state.paymentDue = selectedInvoice.value.paymentDue
+        state.total = selectedInvoice.value.total
+        state.status = selectedInvoice.value.status
+        state.createdAt = selectedInvoice.value.createdAt
+
         const now = Date.now();
-        const { selectedInvoice } = store;
-        state.id = selectedInvoice.id
-        state.clientName = selectedInvoice.clientName
-        state.clientEmail = selectedInvoice.clientEmail
-        state.clientAddress.street = selectedInvoice.clientAddress.street
-        state.clientAddress.postCode = selectedInvoice.clientAddress.postCode
-        state.clientAddress.city = selectedInvoice.clientAddress.city
-        state.clientAddress.country = selectedInvoice.clientAddress.country
-        state.senderAddress.street = selectedInvoice.senderAddress.street
-        state.senderAddress.postCode = selectedInvoice.senderAddress.postCode
-        state.senderAddress.city = selectedInvoice.senderAddress.city
-        state.senderAddress.country = selectedInvoice.senderAddress.country
-        state.description = selectedInvoice.description
-        state.paymentTerms = selectedInvoice.paymentTerms
-        state.paymentDue = selectedInvoice.paymentDue
-        state.total = selectedInvoice.total
-        state.status = selectedInvoice.status
-        state.createdAt = selectedInvoice.createdAt
-        state.items = selectedInvoice.items.map((item, i) => {
+        state.items = selectedInvoice.value.items.map((item, i) => {
             item.id = now + i;
             return item;
         })
