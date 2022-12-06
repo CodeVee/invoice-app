@@ -71,7 +71,8 @@ import AppButton from './AppButton.vue';
 import AppSelect from './AppSelect.vue';
 import AppDatepicker from './AppDatepicker.vue';
 import InvoiceItemForm from './InvoiceItemForm.vue';
-import { store } from '@/store';
+import { useAppStore } from '@/store';
+import { storeToRefs } from 'pinia'
 import { reactive, onBeforeMount, watch } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
@@ -89,6 +90,8 @@ interface Props {
 }
 
 const state = reactive({...getDefaultInvoice()}),
+astore = useAppStore(),
+{ options } = storeToRefs(astore),
 props = defineProps<Props>(),
 rules = {
     senderAddress: {
@@ -110,7 +113,6 @@ rules = {
 },
 v$ = useVuelidate(rules, state),
 editMode = computed(() => !!state.id),
-options = store.options, 
 emits = defineEmits<Emits>(),
 
 addItem = () => {
@@ -170,12 +172,6 @@ watch(() => state.paymentTerms, () => setPaymentDueDate())
 </script>
 
 <style scoped>
-/* .bars {
-    scrollbar-width: none;
-}
-.bars::-webkit-scrollbar {
-    display: none;
-} */
 .lin-gra {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.1) 100%);
 }

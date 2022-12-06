@@ -107,8 +107,9 @@ import  type { Invoice } from '@/models';
 import { formatAmount, formatDate } from '@/helpers';
 import { computed, onMounted, reactive, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { store } from '@/store';
+import { useInvoiceStore, useAppStore } from '@/store'
 import { useScreen } from 'vue-screen'
+import { storeToRefs } from 'pinia'
 
     interface Props { 
         id: string
@@ -119,9 +120,15 @@ import { useScreen } from 'vue-screen'
     }
 
     const screen = useScreen(),
+    istore = useInvoiceStore(),
+    astore = useAppStore(),
+    { invoices } = storeToRefs(istore),
+    { mobileWidth } = storeToRefs(astore),
+    { getInvoices, setInvoice } = istore,
+    { toggleFormMode, toggleModalMode } = astore,
     props = defineProps<Props>(),
     state = reactive<State>({ showForm: false }),
-    isMobile = computed(() => screen.width < store.mobileWidth),
+    isMobile = computed(() => screen.width < mobileWidth.value),
     router = useRouter(),
     goHome = () => router.push({name: 'home'}),
     editInvoice = () => {
@@ -129,12 +136,12 @@ import { useScreen } from 'vue-screen'
         if (isMobile.value) {
             state.showForm = true
         } else {
-            store.setInvoice({...state.invoice} as Invoice)
-            store.toggleFormMode()
+            setInvoice({...state.invoice} as Invoice)
+            toggleFormMode()
         }
         
     },
-    deleteInvoice = () => store.toggleModalMode(),
+    deleteInvoice = () => toggleModalMode(),
     closeMobileForm = () => state.showForm = false
 
     watch(isMobile, (val) => {
@@ -144,11 +151,11 @@ import { useScreen } from 'vue-screen'
     })
 
     onMounted(() => {
-        if (!store.invoices.length) {
-            store.getInvoices()
+        if (!invoices.value.length) {
+            getInvoices()
         }
         
-        const selectedInvoice = store.invoices.find(i => i.id === props.id);
+        const selectedInvoice = invoices.value.find(i => i.id === props.id);
         if (!selectedInvoice) {
             goHome()
             return
