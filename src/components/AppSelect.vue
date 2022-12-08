@@ -1,8 +1,7 @@
 <template>
-    <div class="flex flex-col gap-4 relative">
+    <div v-click-outside-element="closeDropdown" class="flex flex-col gap-4 relative">
         <label class="text-fl font-medium text-blue-gray dark:text-blue-light">{{labelText}}</label>
         <button 
-            @blur="closeDropdown"
             @click="toggleDropdown" 
             class="px-8 h-4.8 rounded-lg flex justify-between items-center bg-white dark:bg-blue-vdark border border-blue-light focus:border-purple-light dark:focus:border-purple-light dark:border-blue-dark  hover:cursor-pointer ">
             <span class="text-fl font-bold text-black dark:text-white">{{selectedOptionName}}</span>
@@ -41,11 +40,7 @@ state = reactive<State>({
 }),
 selectedOptionName = computed(() => props.options.find(o => o.id === props.modelValue)?.name || ''),
 toggleDropdown = () => state.showDropdown = !state.showDropdown,
-closeDropdown = () => {
-    setTimeout(() => {
-        state.showDropdown = false
-    }, 200);   
-},
+closeDropdown = () => state.showDropdown = false,
 selectOption = (id: number) => {
     emit('update:modelValue', id);
 }

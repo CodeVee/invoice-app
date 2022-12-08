@@ -1,5 +1,5 @@
 <template>
-    <div class="w-40 md:w-[19.2rem] flex justify-center relative">
+    <div v-click-outside-element="closeDropdown" class="w-40 md:w-[19.2rem] flex justify-center relative">
         <button @click="toggleDropdown" class="flex">
             <span class="mr-1.2 md:mr-1.6 text-black dark:text-white font-bold text-fl">Filter <span class="hidden md:inline">by status</span></span>
             <img :class="{'rotate-180': state.showDropdown}" class="self-center" src="@/assets/images/icon-arrow-down.svg" alt="down arrow">
@@ -48,7 +48,7 @@ state = reactive<State>({
 
 
 toggleDropdown = () => state.showDropdown = !state.showDropdown,
-
+closeDropdown = () => state.showDropdown = false,
 capitalizeFirstLetter = (str: string) => {
     return str ? str[0].toUpperCase() + str.slice(1) : '';
 };
