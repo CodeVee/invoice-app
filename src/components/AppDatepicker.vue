@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4 relative">
+  <div v-click-outside-element="closeDropdown" class="flex flex-col gap-4 relative">
         <label class="text-fl font-medium text-blue-gray dark:text-blue-light">{{labelText}}</label>
         <button 
             @click="toggleDropdown" 
@@ -90,11 +90,7 @@ toggleDropdown = () => {
         resetCalendar();
     }
 },
-closeDropdown = () => {
-    setTimeout(() => {
-        state.showDropdown = false
-    }, 100);   
-},
+closeDropdown = () => state.showDropdown = false,
 selectDate = (day: number) => {
     const date = formatFormDate(new Date(state.year, state.month, day))
     emit('update:modelValue', date)
